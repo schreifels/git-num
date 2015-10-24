@@ -5,9 +5,11 @@ class GitNum
     def parse_args(args)
       case args[0]
       when nil
-        status
+        print status
       when 'convert'
-        convert(args.drop(1))
+        print convert(args.drop(1))
+      else
+        `git #{args[0]} #{convert(args.drop(1))}`
       end
     end
 
@@ -21,12 +23,12 @@ class GitNum
         $1 + $2 + $3 + '[' + indexes[$4] + '] ' + $4
       end
 
-      print status
+      status
     end
 
     def convert(indexes)
       filenames = filenames_by_index
-      print indexes.map { |index| filenames[index] || index }.join(' ')
+      indexes.map { |index| filenames[index] || index }.join(' ')
     end
 
     def filenames_by_index
