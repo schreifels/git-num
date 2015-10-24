@@ -8,8 +8,24 @@ class GitNum
       end
     end
 
-    def convert(files)
-      print files.join(' ')
+    private
+
+    def convert(indexes)
+      filenames = filenames_by_index
+      print indexes.map { |index| filenames[index] || index }.join(' ')
+    end
+
+    def filenames_by_index
+      i = 0
+      git_status_porcelain.split("\n").reduce({}) do |filenames, status_line|
+        i += 1
+        filenames[i.to_s] = status_line[3..-1]
+        filenames
+      end
+    end
+
+    def git_status_porcelain
+      `git status --porcelain`
     end
   end
 end
