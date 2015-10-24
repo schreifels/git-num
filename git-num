@@ -3,12 +3,26 @@
 class GitNum
   class << self
     def parse_args(args)
-      if args[0] == 'convert'
+      case args[0]
+      when nil
+        status
+      when 'convert'
         convert(args.drop(1))
       end
     end
 
     private
+
+    def status
+      indexes = filenames_by_index.invert
+      status = git_status
+
+      status.gsub!(/(\t)(.+:)(\s+)(.+)/) do
+        $1 + $2 + $3 + '[' + indexes[$4] + '] ' + $4
+      end
+
+      print status
+    end
 
     def convert(indexes)
       filenames = filenames_by_index
@@ -22,6 +36,10 @@ class GitNum
         filenames[i.to_s] = status_line[3..-1]
         filenames
       end
+    end
+
+    def git_status
+      `git status`
     end
 
     def git_status_porcelain
