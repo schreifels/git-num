@@ -41,7 +41,7 @@ class GitNum
     end
 
     def git_status
-      `git status`
+      `git status --long`
     end
 
     def git_status_porcelain
