@@ -32,5 +32,10 @@ describe GitNum do
       expect { parse_args('convert file1 1 3 other-file') }.to \
           output('file1 file1 file3 other-file').to_stdout
     end
+
+    it 'supports no args' do
+      expect { parse_args('convert') }.to \
+          output('').to_stdout
+    end
   end
 end
