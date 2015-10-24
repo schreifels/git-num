@@ -1,0 +1,19 @@
+#!/usr/bin/ruby
+
+class GitNum
+  class << self
+    def parse_args(args)
+      if args[0] == 'convert'
+        convert(args.drop(1))
+      end
+    end
+
+    def convert(files)
+      print files.join(' ')
+    end
+  end
+end
+
+if __FILE__ == $PROGRAM_NAME
+  GitNum.parse_args(ARGV)
+end
