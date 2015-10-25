@@ -1,5 +1,5 @@
 load 'git-num'
-require 'unit_fixtures'
+require 'lib/fixtures'
 
 describe GitNum do
   def parse_args(args='')
