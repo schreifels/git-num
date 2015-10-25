@@ -45,6 +45,8 @@ GIT_NUM_FIXTURES = {
     ].join("\n")
   },
 
+  ##############################################################################
+
   directories: {
     porcelain: [
       'XX dir1/file',
@@ -77,6 +79,38 @@ GIT_NUM_FIXTURES = {
       '  (use "git add <file>..." to include in what will be committed)',
       '',
       "\t[2] dir2/"
+    ].join("\n")
+  },
+
+  ##############################################################################
+
+  missing_index: {
+    porcelain: [
+      'XX file1'
+    ].join("\n"),
+
+    status: [
+      'On branch master',
+      'Changes not staged for commit:',
+      '  (use "git add <file>..." to update what will be committed)',
+      '  (use "git checkout -- <file>..." to discard changes in working directory)',
+      '',
+      "\tmodified:   file1",
+      "\tmodified:   file2",
+      '',
+      'no changes added to commit (use "git add" and/or "git commit -a")'
+    ].join("\n"),
+
+    annotated_status: [
+      'On branch master',
+      'Changes not staged for commit:',
+      '  (use "git add <file>..." to update what will be committed)',
+      '  (use "git checkout -- <file>..." to discard changes in working directory)',
+      '',
+      "\tmodified:   [1] file1",
+      "\tmodified:   [?] file2",
+      '',
+      'no changes added to commit (use "git add" and/or "git commit -a")'
     ].join("\n")
   }
 }

@@ -20,7 +20,7 @@ class GitNum
       status = git_status
 
       status.gsub!(/(\t)(.+:\s+)?(.+)/) do
-        index = indexes[$3]
+        index = indexes[$3] || '?'
         "#{$1}#{$2}[#{index}] #{$3}"
       end
 
