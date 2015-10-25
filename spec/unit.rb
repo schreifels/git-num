@@ -6,6 +6,14 @@ describe GitNum do
     GitNum.parse_args(args.split(' ').map(&:strip))
   end
 
+  describe 'help' do
+    ['-h', '--help', 'help'].each do |flag|
+      it "outputs usage with flag: #{flag}" do
+        expect { parse_args(flag) }.to output(/USAGE:/).to_stdout
+      end
+    end
+  end
+
   describe 'status' do
     FIXTURES.each do |name, fixture|
       it "properly annotates `git status` with indexes in #{name} case" do
