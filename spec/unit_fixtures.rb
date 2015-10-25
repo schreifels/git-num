@@ -1,9 +1,18 @@
 class GitNumFixtures
   class << self
-    private
+    def colorize(section, str)
+      i = case section
+          when :staged
+            33
+          when :unstaged
+            32
+          when :untracked
+            36
+          else
+            raise "Unknown section: #{section}"
+          end
 
-    def colorize(str)
-      "\e[33m#{str}\e[m"
+      "\e[#{i}m#{str}\e[m"
     end
   end
 
@@ -27,25 +36,25 @@ class GitNumFixtures
         'Changes to be committed:',
         '  (use "git reset HEAD <file>..." to unstage)',
         '',
-        "\t" + colorize('modified:   file1'),
+        "\t" + colorize(:staged, 'modified:   file1'),
         '',
         'Changes not staged for commit:',
         '  (use "git add <file>..." to update what will be committed)',
         '  (use "git checkout -- <file>..." to discard changes in working directory)',
         '',
-        "\t" + colorize('modified:   file2'),
-        "\t" + colorize('modified:   file3'),
-        "\t" + colorize('modified:   file4'),
+        "\t" + colorize(:unstaged, 'modified:   file2'),
+        "\t" + colorize(:unstaged, 'modified:   file3'),
+        "\t" + colorize(:unstaged, 'modified:   file4'),
         '',
         'Untracked files:',
         '  (use "git add <file>..." to include in what will be committed)',
         '',
-        "\t" + colorize('file5'),
-        "\t" + colorize('file6'),
-        "\t" + colorize('file7'),
-        "\t" + colorize('file8'),
-        "\t" + colorize('file9'),
-        "\t" + colorize('file10')
+        "\t" + colorize(:untracked, 'file5'),
+        "\t" + colorize(:untracked, 'file6'),
+        "\t" + colorize(:untracked, 'file7'),
+        "\t" + colorize(:untracked, 'file8'),
+        "\t" + colorize(:untracked, 'file9'),
+        "\t" + colorize(:untracked, 'file10')
       ].join("\n"),
 
       annotated_status: [
@@ -53,25 +62,25 @@ class GitNumFixtures
         'Changes to be committed:',
         '  (use "git reset HEAD <file>..." to unstage)',
         '',
-        "\t" + colorize('modified:   [1] file1'),
+        "\t" + colorize(:staged, 'modified:   [1] file1'),
         '',
         'Changes not staged for commit:',
         '  (use "git add <file>..." to update what will be committed)',
         '  (use "git checkout -- <file>..." to discard changes in working directory)',
         '',
-        "\t" + colorize('modified:   [2] file2'),
-        "\t" + colorize('modified:   [3] file3'),
-        "\t" + colorize('modified:   [4] file4'),
+        "\t" + colorize(:unstaged, 'modified:   [2] file2'),
+        "\t" + colorize(:unstaged, 'modified:   [3] file3'),
+        "\t" + colorize(:unstaged, 'modified:   [4] file4'),
         '',
         'Untracked files:',
         '  (use "git add <file>..." to include in what will be committed)',
         '',
-        "\t" + colorize('[5] file5'),
-        "\t" + colorize('[6] file6'),
-        "\t" + colorize('[7] file7'),
-        "\t" + colorize('[8] file8'),
-        "\t" + colorize('[9] file9'),
-        "\t" + colorize('[10] file10')
+        "\t" + colorize(:untracked, '[5] file5'),
+        "\t" + colorize(:untracked, '[6] file6'),
+        "\t" + colorize(:untracked, '[7] file7'),
+        "\t" + colorize(:untracked, '[8] file8'),
+        "\t" + colorize(:untracked, '[9] file9'),
+        "\t" + colorize(:untracked, '[10] file10')
       ].join("\n")
     },
 
@@ -89,12 +98,12 @@ class GitNumFixtures
         '  (use "git add <file>..." to update what will be committed)',
         '  (use "git checkout -- <file>..." to discard changes in working directory)',
         '',
-        "\t" + colorize('modified:   dir1/file'),
+        "\t" + colorize(:unstaged, 'modified:   dir1/file'),
         '',
         'Untracked files:',
         '  (use "git add <file>..." to include in what will be committed)',
         '',
-        "\t" + colorize('dir2/')
+        "\t" + colorize(:untracked, 'dir2/')
       ].join("\n"),
 
       annotated_status: [
@@ -103,12 +112,12 @@ class GitNumFixtures
         '  (use "git add <file>..." to update what will be committed)',
         '  (use "git checkout -- <file>..." to discard changes in working directory)',
         '',
-        "\t" + colorize('modified:   [1] dir1/file'),
+        "\t" + colorize(:unstaged, 'modified:   [1] dir1/file'),
         '',
         'Untracked files:',
         '  (use "git add <file>..." to include in what will be committed)',
         '',
-        "\t" + colorize('[2] dir2/')
+        "\t" + colorize(:untracked, '[2] dir2/')
       ].join("\n")
     },
 
@@ -125,8 +134,8 @@ class GitNumFixtures
         '  (use "git add <file>..." to update what will be committed)',
         '  (use "git checkout -- <file>..." to discard changes in working directory)',
         '',
-        "\t" + colorize('modified:   file1'),
-        "\t" + colorize('modified:   file2'),
+        "\t" + colorize(:unstaged, 'modified:   file1'),
+        "\t" + colorize(:unstaged, 'modified:   file2'),
         '',
         'no changes added to commit (use "git add" and/or "git commit -a")'
       ].join("\n"),
@@ -137,8 +146,8 @@ class GitNumFixtures
         '  (use "git add <file>..." to update what will be committed)',
         '  (use "git checkout -- <file>..." to discard changes in working directory)',
         '',
-        "\t" + colorize('modified:   [1] file1'),
-        "\t" + colorize('modified:   [?] file2'),
+        "\t" + colorize(:unstaged, 'modified:   [1] file1'),
+        "\t" + colorize(:unstaged, 'modified:   [?] file2'),
         '',
         'no changes added to commit (use "git add" and/or "git commit -a")'
       ].join("\n")
@@ -156,13 +165,13 @@ class GitNumFixtures
         'Changes to be committed:',
         '  (use "git reset HEAD <file>..." to unstage)',
         '',
-        "\t" + colorize('renamed:    file1 -> file2'),
+        "\t" + colorize(:staged, 'renamed:    file1 -> file2'),
         '',
         'Changes not staged for commit:',
         '  (use "git add <file>..." to update what will be committed)',
         '  (use "git checkout -- <file>..." to discard changes in working directory)',
         '',
-        "\t" + colorize('modified:   file2')
+        "\t" + colorize(:unstaged, 'modified:   file2')
       ].join("\n"),
 
       annotated_status: [
@@ -170,13 +179,13 @@ class GitNumFixtures
         'Changes to be committed:',
         '  (use "git reset HEAD <file>..." to unstage)',
         '',
-        "\t" + colorize('renamed:    [1] file1 -> [2] file2'),
+        "\t" + colorize(:staged, 'renamed:    [1] file1 -> [2] file2'),
         '',
         'Changes not staged for commit:',
         '  (use "git add <file>..." to update what will be committed)',
         '  (use "git checkout -- <file>..." to discard changes in working directory)',
         '',
-        "\t" + colorize('modified:   [2] file2')
+        "\t" + colorize(:unstaged, 'modified:   [2] file2')
       ].join("\n")
     },
 
@@ -196,23 +205,23 @@ class GitNumFixtures
         'Changes to be committed:',
         '  (use "git reset HEAD <file>..." to unstage)',
         '',
-        "\t" + colorize('renamed:    "file with \\"double\\" quotes" -> "file still with \\"double\\" quotes"'),
-        "\t" + colorize('renamed:    file with \'single\' quotes -> file still with \'single\' quotes'),
-        "\t" + colorize('renamed:    file with spaces -> file still with spaces'),
+        "\t" + colorize(:staged, 'renamed:    "file with \\"double\\" quotes" -> "file still with \\"double\\" quotes"'),
+        "\t" + colorize(:staged, 'renamed:    file with \'single\' quotes -> file still with \'single\' quotes'),
+        "\t" + colorize(:staged, 'renamed:    file with spaces -> file still with spaces'),
         '',
         'Changes not staged for commit:',
         '  (use "git add <file>..." to update what will be committed)',
         '  (use "git checkout -- <file>..." to discard changes in working directory)',
         '',
-        "\t" + colorize('modified:   "file still with \\"double\\" quotes"'),
-        "\t" + colorize('modified:   file still with \'single\' quotes'),
-        "\t" + colorize('modified:   file still with spaces'),
+        "\t" + colorize(:unstaged, 'modified:   "file still with \\"double\\" quotes"'),
+        "\t" + colorize(:unstaged, 'modified:   file still with \'single\' quotes'),
+        "\t" + colorize(:unstaged, 'modified:   file still with spaces'),
         '',
         'Untracked files:',
         '  (use "git add <file>..." to include in what will be committed)',
         '',
-        "\t" + colorize('file_with_!@#$%_special_chars'),
-        "\t" + colorize('file_with_underscores')
+        "\t" + colorize(:untracked, 'file_with_!@#$%_special_chars'),
+        "\t" + colorize(:untracked, 'file_with_underscores')
       ].join("\n"),
 
       annotated_status: [
@@ -220,23 +229,23 @@ class GitNumFixtures
         'Changes to be committed:',
         '  (use "git reset HEAD <file>..." to unstage)',
         '',
-        "\t" + colorize('renamed:    [1] "file with \\"double\\" quotes" -> [2] "file still with \\"double\\" quotes"'),
-        "\t" + colorize('renamed:    [3] file with \'single\' quotes -> [4] file still with \'single\' quotes'),
-        "\t" + colorize('renamed:    [5] file with spaces -> [6] file still with spaces'),
+        "\t" + colorize(:staged, 'renamed:    [1] "file with \\"double\\" quotes" -> [2] "file still with \\"double\\" quotes"'),
+        "\t" + colorize(:staged, 'renamed:    [3] file with \'single\' quotes -> [4] file still with \'single\' quotes'),
+        "\t" + colorize(:staged, 'renamed:    [5] file with spaces -> [6] file still with spaces'),
         '',
         'Changes not staged for commit:',
         '  (use "git add <file>..." to update what will be committed)',
         '  (use "git checkout -- <file>..." to discard changes in working directory)',
         '',
-        "\t" + colorize('modified:   [2] "file still with \\"double\\" quotes"'),
-        "\t" + colorize('modified:   [4] file still with \'single\' quotes'),
-        "\t" + colorize('modified:   [6] file still with spaces'),
+        "\t" + colorize(:unstaged, 'modified:   [2] "file still with \\"double\\" quotes"'),
+        "\t" + colorize(:unstaged, 'modified:   [4] file still with \'single\' quotes'),
+        "\t" + colorize(:unstaged, 'modified:   [6] file still with spaces'),
         '',
         'Untracked files:',
         '  (use "git add <file>..." to include in what will be committed)',
         '',
-        "\t" + colorize('[7] file_with_!@#$%_special_chars'),
-        "\t" + colorize('[8] file_with_underscores')
+        "\t" + colorize(:untracked, '[7] file_with_!@#$%_special_chars'),
+        "\t" + colorize(:untracked, '[8] file_with_underscores')
       ].join("\n")
     }
   }
