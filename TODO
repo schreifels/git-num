@@ -1,0 +1,6 @@
+- Verify that it works for merges
+- Add integration tests
+- Create README
+- Add usage (-h)
+- Put on GitHub
+- Support index ranges ("convert 1-4 6 8")
