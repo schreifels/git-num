@@ -6,18 +6,21 @@ describe GitNum do
     GitNum.parse_args(args.split(' ').map(&:strip))
   end
 
-  before(:each) do
-    allow(GitNum).to receive(:git_status_porcelain).and_return(GitNumFixtures::BASIC_PORCELAIN)
-  end
-
   describe 'status' do
-    it 'annotates `git status` with indexes' do
-      allow(GitNum).to receive(:git_status).and_return(GitNumFixtures::BASIC_STATUS)
-      expect { parse_args }.to output(GitNumFixtures::BASIC_STATUS_ANNOTATED).to_stdout
+    GIT_NUM_FIXTURES.each do |name, fixture|
+      it "properly annotates `git status` with indexes in #{name} case" do
+        allow(GitNum).to receive(:git_status_porcelain).and_return(GIT_NUM_FIXTURES[name][:porcelain])
+        allow(GitNum).to receive(:git_status).and_return(GIT_NUM_FIXTURES[name][:status])
+        expect { parse_args }.to output(GIT_NUM_FIXTURES[name][:annotated_status]).to_stdout
+      end
     end
   end
 
   describe 'convert' do
+    before(:each) do
+      allow(GitNum).to receive(:git_status_porcelain).and_return(GIT_NUM_FIXTURES[:basic][:porcelain])
+    end
+
     it 'converts args to filenames' do
       expect { parse_args('convert 1 file2 3') }.to \
           output('file1 file2 file3').to_stdout
@@ -42,6 +45,10 @@ describe GitNum do
   end
 
   describe 'arbitrary git command execution' do
+    before(:each) do
+      allow(GitNum).to receive(:git_status_porcelain).and_return(GIT_NUM_FIXTURES[:basic][:porcelain])
+    end
+
     it 'supports any git command' do
       expect(GitNum).to receive(:`).ordered.with('git add file1 file2 file3')
       parse_args('add 1 file2 3')
