@@ -19,6 +19,9 @@ EXAMPLES:
 
 # Screenshot
 
+git-num works by annotating the output of `git status` with numbers. (It will
+maintain whatever color scheme you use.)
+
 ![](https://raw.githubusercontent.com/schreifels/git-num/master/screenshot.jpg)
 
 # Installation
