@@ -28,6 +28,34 @@ Simply download the
 place it in a directory that is in your `PATH`, and `chmod +x git-num`. Git will
 automatically use this executable when you call `git num`.
 
+# Customization
+
+It's handy to create an alias for `git num`:
+
+```bash
+alias gn="git num"
+```
+
+You can take this a step further if you have aliases for other git commands,
+e.g.:
+
+```bash
+alias ga="git num add"
+__git_complete ga _git_add
+alias grh="git num reset head"
+__git_complete grh _git_reset
+alias gco="git num checkout"
+__git_complete gco _git_checkout
+```
+
+You can also use git-num in conjunction with non-git commands, e.g.:
+
+```bash
+function ber() { git num convert "$@" | xargs bundle exec rspec; }
+```
+
+will cause `ber 2` to execute `bundle exec rspec [file at index 2]`.
+
 # Goal
 
 The goal of this project was to create a lightweight, well-tested Ruby command
