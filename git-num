@@ -17,14 +17,14 @@ class GitNum
 
     def status
       indexes = filenames_by_index.invert
-      status = git_status
 
-      status.gsub!(/(\t)(.+:\s+)?(.+)/) do
-        index = indexes[$3] || '?'
-        "#{$1}#{$2}[#{index}] #{$3}"
+      git_status.gsub(/(\t)(.+:\s+)?(.+)/) do
+        filenames = $3.split(' -> ').map do |filename|
+          "[#{indexes[filename] || '?'}] #{filename}"
+        end.join(' -> ')
+
+        "#{$1}#{$2}#{filenames}"
       end
-
-      status
     end
 
     def convert(indexes)
@@ -35,8 +35,10 @@ class GitNum
     def filenames_by_index
       i = 0
       git_status_porcelain.split("\n").reduce({}) do |filenames, status_line|
-        i += 1
-        filenames[i.to_s] = status_line[3..-1]
+        status_line[3..-1].split(' -> ').each do |filename|
+          i += 1
+          filenames[i.to_s] = filename
+        end
         filenames
       end
     end

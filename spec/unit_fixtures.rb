@@ -112,5 +112,41 @@ GIT_NUM_FIXTURES = {
       '',
       'no changes added to commit (use "git add" and/or "git commit -a")'
     ].join("\n")
+  },
+
+  ##############################################################################
+
+  renames: {
+    porcelain: [
+      'XX file1 -> file2'
+    ].join("\n"),
+
+    status: [
+      'On branch master',
+      'Changes to be committed:',
+      '  (use "git reset HEAD <file>..." to unstage)',
+      '',
+      "\trenamed:    file1 -> file2",
+      '',
+      'Changes not staged for commit:',
+      '  (use "git add <file>..." to update what will be committed)',
+      '  (use "git checkout -- <file>..." to discard changes in working directory)',
+      '',
+      "\tmodified:   file2"
+    ].join("\n"),
+
+    annotated_status: [
+      'On branch master',
+      'Changes to be committed:',
+      '  (use "git reset HEAD <file>..." to unstage)',
+      '',
+      "\trenamed:    [1] file1 -> [2] file2",
+      '',
+      'Changes not staged for commit:',
+      '  (use "git add <file>..." to update what will be committed)',
+      '  (use "git checkout -- <file>..." to discard changes in working directory)',
+      '',
+      "\tmodified:   [2] file2"
+    ].join("\n")
   }
 }
