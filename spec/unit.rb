@@ -3,11 +3,9 @@ load 'git-num'
 describe GitNum do
   let(:git_status_porcelain) do
     [
-      'M  file1',
-      'M  file2',
-      ' M file3',
-      '?? file4',
-      '?? file5'
+      'XX file1',
+      'XX file2',
+      'XX file3'
     ].join("\n")
   end
 
@@ -27,19 +25,17 @@ describe GitNum do
         '  (use "git reset HEAD <file>..." to unstage)',
         '',
         "\tmodified:   file1",
-        "\tmodified:   file2",
         '',
         'Changes not staged for commit:',
         '  (use "git add <file>..." to update what will be committed)',
         '  (use "git checkout -- <file>..." to discard changes in working directory)',
         '',
-        "\tmodified:   file3",
+        "\tmodified:   file2",
         '',
         'Untracked files:',
         '  (use "git add <file>..." to include in what will be committed)',
         '',
-        "\tfile4",
-        "\tfile5"
+        "\tfile3"
       ].join("\n")
     end
 
@@ -50,19 +46,17 @@ describe GitNum do
         '  (use "git reset HEAD <file>..." to unstage)',
         '',
         "\tmodified:   [1] file1",
-        "\tmodified:   [2] file2",
         '',
         'Changes not staged for commit:',
         '  (use "git add <file>..." to update what will be committed)',
         '  (use "git checkout -- <file>..." to discard changes in working directory)',
         '',
-        "\tmodified:   [3] file3",
+        "\tmodified:   [2] file2",
         '',
         'Untracked files:',
         '  (use "git add <file>..." to include in what will be committed)',
         '',
-        "\t[4] file4",
-        "\t[5] file5"
+        "\t[3] file3"
       ].join("\n")
     end
 
@@ -77,8 +71,8 @@ describe GitNum do
 
   describe 'convert' do
     it 'converts args to filenames' do
-      expect { parse_args('convert 1 3 5') }.to \
-          output('file1 file3 file5').to_stdout
+      expect { parse_args('convert 1 file2 3') }.to \
+          output('file1 file2 file3').to_stdout
     end
 
     it 'acts as a pass-through for unmatched args' do
