@@ -5,11 +5,12 @@ NAME:
   git-num - Quickly (un)stage files in Git using numbers
 
 USAGE:
-  git num [git_cmd [indexes...] | convert indexes... | -h]
+  git num [git_cmd [index...] | convert index... | -h]
 
 EXAMPLES:
-  git num                # show git status with indexes
+  git num                # show `git status` with git-num indexes
   git num add 1-3 5      # call `git add` with files at indexes 1, 2, 3, 5
+  git num add README 2   # call `git add` with "README" and file at index 2
   git num reset head 4   # call `git reset head` with file at index 4
   git num checkout -- 4  # call `git checkout --` with file at index 4
   git num convert 1-3    # write filenames at indexes 1, 2, 3 to STDOUT
@@ -31,4 +32,4 @@ automatically use this executable when you call `git num`.
 
 The goal of this project was to create a lightweight, well-tested Ruby command
 line utility for referencing files in Git. Unlike other similar projects,
-git-num supports renames, filenames with spaces, and other corner cases.
+git-num supports renamed files, filenames with spaces, and other corner cases.
