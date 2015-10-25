@@ -7,18 +7,18 @@ describe GitNum do
   end
 
   describe 'status' do
-    GIT_NUM_FIXTURES.each do |name, fixture|
+    GitNumFixtures::FIXTURES.each do |name, fixture|
       it "properly annotates `git status` with indexes in #{name} case" do
-        allow(GitNum).to receive(:git_status_porcelain).and_return(GIT_NUM_FIXTURES[name][:porcelain])
-        allow(GitNum).to receive(:git_status).and_return(GIT_NUM_FIXTURES[name][:status])
-        expect { parse_args }.to output(GIT_NUM_FIXTURES[name][:annotated_status]).to_stdout
+        allow(GitNum).to receive(:git_status_porcelain).and_return(GitNumFixtures::FIXTURES[name][:porcelain])
+        allow(GitNum).to receive(:git_status).and_return(GitNumFixtures::FIXTURES[name][:status])
+        expect { parse_args }.to output(GitNumFixtures::FIXTURES[name][:annotated_status]).to_stdout
       end
     end
   end
 
   describe 'convert' do
     before(:each) do
-      allow(GitNum).to receive(:git_status_porcelain).and_return(GIT_NUM_FIXTURES[:basic][:porcelain])
+      allow(GitNum).to receive(:git_status_porcelain).and_return(GitNumFixtures::FIXTURES[:basic][:porcelain])
     end
 
     it 'converts args to filenames' do
@@ -44,7 +44,7 @@ describe GitNum do
     end
 
     it 'supports special characters' do
-      allow(GitNum).to receive(:git_status_porcelain).and_return(GIT_NUM_FIXTURES[:special_characters][:porcelain])
+      allow(GitNum).to receive(:git_status_porcelain).and_return(GitNumFixtures::FIXTURES[:special_characters][:porcelain])
       expect { parse_args('convert 1') }.to output('"file with \\"double\\" quotes"').to_stdout
       expect { parse_args('convert 2') }.to output('"file still with \\"double\\" quotes"').to_stdout
       expect { parse_args('convert 3') }.to output('"file with \'single\' quotes"').to_stdout
@@ -58,7 +58,7 @@ describe GitNum do
 
   describe 'arbitrary git command execution' do
     before(:each) do
-      allow(GitNum).to receive(:git_status_porcelain).and_return(GIT_NUM_FIXTURES[:basic][:porcelain])
+      allow(GitNum).to receive(:git_status_porcelain).and_return(GitNumFixtures::FIXTURES[:basic][:porcelain])
     end
 
     it 'supports any git command' do

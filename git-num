@@ -18,15 +18,15 @@ class GitNum
     def status
       indexes = filenames_by_index.invert
 
-      git_status.gsub(/(\t)(.+:\s+)?(.+)/) do
-        whitespace, description, filenames = $1, $2, $3
+      git_status.gsub(/(\t)(\e\[[0-9]+m)(.+:\s+)?(.+)(\e\[m)/) do
+        tab, start_color, description, filenames, end_color = $1, $2, $3, $4, $5
 
         filenames = filenames.split(' -> ').map do |filename|
           index = indexes[filename.gsub(/\A"|"\z/, '')] || '?'
           "[#{index}] #{filename}"
         end.join(' -> ')
 
-        "#{whitespace}#{description}#{filenames}"
+        "#{tab}#{start_color}#{description}#{filenames}#{end_color}"
       end
     end
 
@@ -47,7 +47,7 @@ class GitNum
     end
 
     def git_status
-      `git status --long`
+      `git -c color.status=always status --long`
     end
 
     def git_status_porcelain
