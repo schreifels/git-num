@@ -1,5 +1,5 @@
 load 'git-num'
-require 'lib/fixtures'
+require 'lib/spec_helper'
 
 describe GitNum do
   def parse_args(args='')
@@ -7,26 +7,22 @@ describe GitNum do
   end
 
   describe 'status' do
-    GitNumFixtures::FIXTURES.each do |name, fixture|
+    FIXTURES.each do |name, fixture|
       it "properly annotates `git status` with indexes in #{name} case" do
-        allow(GitNum).to receive(:git_status_porcelain)
-            .and_return(GitNumFixtures::FIXTURES[name][:porcelain])
-        allow(GitNum).to receive(:git_status)
-            .and_return(GitNumFixtures::FIXTURES[name][:status])
-        expect { parse_args }.to \
-            output(GitNumFixtures::FIXTURES[name][:annotated_status]).to_stdout
+        allow(GitNum).to receive(:git_status_porcelain).and_return(FIXTURES[name][:porcelain])
+        allow(GitNum).to receive(:git_status).and_return(FIXTURES[name][:status])
+        expect { parse_args }.to output(FIXTURES[name][:annotated_status]).to_stdout
       end
     end
 
     it 'runs some tests' do
-      expect(GitNumFixtures::FIXTURES.length).to be > 2
+      expect(FIXTURES.length).to be > 2
     end
   end
 
   describe 'convert' do
     before(:each) do
-      allow(GitNum).to receive(:git_status_porcelain)
-          .and_return(GitNumFixtures::FIXTURES[:basic][:porcelain])
+      allow(GitNum).to receive(:git_status_porcelain).and_return(FIXTURES[:basic][:porcelain])
     end
 
     it 'converts args to filenames' do
@@ -65,7 +61,7 @@ describe GitNum do
 
     it 'supports special characters' do
       allow(GitNum).to receive(:git_status_porcelain)
-          .and_return(GitNumFixtures::FIXTURES[:special_characters][:porcelain])
+          .and_return(FIXTURES[:special_characters][:porcelain])
       expect { parse_args('convert 1') }.to output('"file with \\"double\\" quotes"').to_stdout
       expect { parse_args('convert 2') }.to output('"file still with \\"double\\" quotes"').to_stdout
       expect { parse_args('convert 3') }.to output('"file with \'single\' quotes"').to_stdout
@@ -79,8 +75,7 @@ describe GitNum do
 
   describe 'arbitrary git command execution' do
     before(:each) do
-      allow(GitNum).to receive(:git_status_porcelain)
-          .and_return(GitNumFixtures::FIXTURES[:basic][:porcelain])
+      allow(GitNum).to receive(:git_status_porcelain).and_return(FIXTURES[:basic][:porcelain])
     end
 
     it 'supports any git command' do
