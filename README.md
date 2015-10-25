@@ -19,3 +19,16 @@ EXAMPLES:
 # Screenshot
 
 ![](https://raw.githubusercontent.com/schreifels/git-num/master/screenshot.jpg)
+
+# Installation
+
+Simply download the
+[git-num executable](https://raw.githubusercontent.com/schreifels/git-num/master/git-num),
+place it in a directory that is in your `PATH`, and `chmod +x git-num`. Git will
+automatically use this executable when you call `git num`.
+
+# Goal
+
+The goal of this project was to create a lightweight, well-tested Ruby command
+line utility for referencing files in Git. Unlike other similar projects,
+git-num supports renames, filenames with spaces, and other corner cases.
