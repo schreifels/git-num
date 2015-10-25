@@ -12,7 +12,14 @@ class GitNumFixtures
       porcelain: [
         'XX file1',
         'XX file2',
-        'XX file3'
+        'XX file3',
+        'XX file4',
+        'XX file5',
+        'XX file6',
+        'XX file7',
+        'XX file8',
+        'XX file9',
+        'XX file10'
       ].join("\n"),
 
       status: [
@@ -27,11 +34,18 @@ class GitNumFixtures
         '  (use "git checkout -- <file>..." to discard changes in working directory)',
         '',
         "\t" + colorize('modified:   file2'),
+        "\t" + colorize('modified:   file3'),
+        "\t" + colorize('modified:   file4'),
         '',
         'Untracked files:',
         '  (use "git add <file>..." to include in what will be committed)',
         '',
-        "\t" + colorize('file3')
+        "\t" + colorize('file5'),
+        "\t" + colorize('file6'),
+        "\t" + colorize('file7'),
+        "\t" + colorize('file8'),
+        "\t" + colorize('file9'),
+        "\t" + colorize('file10')
       ].join("\n"),
 
       annotated_status: [
@@ -46,11 +60,18 @@ class GitNumFixtures
         '  (use "git checkout -- <file>..." to discard changes in working directory)',
         '',
         "\t" + colorize('modified:   [2] file2'),
+        "\t" + colorize('modified:   [3] file3'),
+        "\t" + colorize('modified:   [4] file4'),
         '',
         'Untracked files:',
         '  (use "git add <file>..." to include in what will be committed)',
         '',
-        "\t" + colorize('[3] file3')
+        "\t" + colorize('[5] file5'),
+        "\t" + colorize('[6] file6'),
+        "\t" + colorize('[7] file7'),
+        "\t" + colorize('[8] file8'),
+        "\t" + colorize('[9] file9'),
+        "\t" + colorize('[10] file10')
       ].join("\n")
     },
 

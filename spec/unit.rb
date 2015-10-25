@@ -9,9 +9,12 @@ describe GitNum do
   describe 'status' do
     GitNumFixtures::FIXTURES.each do |name, fixture|
       it "properly annotates `git status` with indexes in #{name} case" do
-        allow(GitNum).to receive(:git_status_porcelain).and_return(GitNumFixtures::FIXTURES[name][:porcelain])
-        allow(GitNum).to receive(:git_status).and_return(GitNumFixtures::FIXTURES[name][:status])
-        expect { parse_args }.to output(GitNumFixtures::FIXTURES[name][:annotated_status]).to_stdout
+        allow(GitNum).to receive(:git_status_porcelain)
+            .and_return(GitNumFixtures::FIXTURES[name][:porcelain])
+        allow(GitNum).to receive(:git_status)
+            .and_return(GitNumFixtures::FIXTURES[name][:status])
+        expect { parse_args }.to \
+            output(GitNumFixtures::FIXTURES[name][:annotated_status]).to_stdout
       end
     end
 
@@ -22,7 +25,8 @@ describe GitNum do
 
   describe 'convert' do
     before(:each) do
-      allow(GitNum).to receive(:git_status_porcelain).and_return(GitNumFixtures::FIXTURES[:basic][:porcelain])
+      allow(GitNum).to receive(:git_status_porcelain)
+          .and_return(GitNumFixtures::FIXTURES[:basic][:porcelain])
     end
 
     it 'converts args to filenames' do
@@ -43,12 +47,25 @@ describe GitNum do
     end
 
     it 'supports no args' do
-      expect { parse_args('convert') }.to \
-          output('').to_stdout
+      expect { parse_args('convert') }.to output('').to_stdout
+    end
+
+    it 'supports ranges' do
+      expect { parse_args('convert 1-1') }.to \
+          output('"file1"').to_stdout
+      expect { parse_args('convert 1-3') }.to \
+          output('"file1" "file2" "file3"').to_stdout
+      expect { parse_args('convert 1-3 6 7-10') }.to \
+          output('"file1" "file2" "file3" "file6" "file7" "file8" "file9" "file10"').to_stdout
+      expect { parse_args('convert 3-4 6 1-5') }.to \
+          output('"file3" "file4" "file6" "file1" "file2" "file3" "file4" "file5"').to_stdout
+      expect { parse_args('convert 10-15') }.to \
+          output('"file10" 11 12 13 14 15').to_stdout
     end
 
     it 'supports special characters' do
-      allow(GitNum).to receive(:git_status_porcelain).and_return(GitNumFixtures::FIXTURES[:special_characters][:porcelain])
+      allow(GitNum).to receive(:git_status_porcelain)
+          .and_return(GitNumFixtures::FIXTURES[:special_characters][:porcelain])
       expect { parse_args('convert 1') }.to output('"file with \\"double\\" quotes"').to_stdout
       expect { parse_args('convert 2') }.to output('"file still with \\"double\\" quotes"').to_stdout
       expect { parse_args('convert 3') }.to output('"file with \'single\' quotes"').to_stdout
@@ -62,7 +79,8 @@ describe GitNum do
 
   describe 'arbitrary git command execution' do
     before(:each) do
-      allow(GitNum).to receive(:git_status_porcelain).and_return(GitNumFixtures::FIXTURES[:basic][:porcelain])
+      allow(GitNum).to receive(:git_status_porcelain)
+          .and_return(GitNumFixtures::FIXTURES[:basic][:porcelain])
     end
 
     it 'supports any git command' do

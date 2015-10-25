@@ -32,7 +32,18 @@ class GitNum
 
     def convert(indexes)
       filenames = filenames_by_index
-      indexes.map { |index| filenames[index] ? "\"#{filenames[index]}\"" : index }.join(' ')
+
+      expanded_indexes = indexes.map do |index|
+        if range = index.match(/([0-9]+)-([0-9]+)/)
+          (range[1]..range[2]).to_a
+        else
+          index
+        end
+      end.flatten
+
+      expanded_indexes.map do |index|
+        filenames[index] ? "\"#{filenames[index]}\"" : index
+      end.join(' ')
     end
 
     def filenames_by_index
