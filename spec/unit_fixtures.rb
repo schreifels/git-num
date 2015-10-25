@@ -43,5 +43,40 @@ GIT_NUM_FIXTURES = {
       '',
       "\t[3] file3"
     ].join("\n")
+  },
+
+  directories: {
+    porcelain: [
+      'XX dir1/file',
+      'XX dir2/'
+    ].join("\n"),
+
+    status: [
+      'On branch master',
+      'Changes not staged for commit:',
+      '  (use "git add <file>..." to update what will be committed)',
+      '  (use "git checkout -- <file>..." to discard changes in working directory)',
+      '',
+      "\tmodified:   dir1/file",
+      '',
+      'Untracked files:',
+      '  (use "git add <file>..." to include in what will be committed)',
+      '',
+      "\tdir2/"
+    ].join("\n"),
+
+    annotated_status: [
+      'On branch master',
+      'Changes not staged for commit:',
+      '  (use "git add <file>..." to update what will be committed)',
+      '  (use "git checkout -- <file>..." to discard changes in working directory)',
+      '',
+      "\tmodified:   [1] dir1/file",
+      '',
+      'Untracked files:',
+      '  (use "git add <file>..." to include in what will be committed)',
+      '',
+      "\t[2] dir2/"
+    ].join("\n")
   }
 }
