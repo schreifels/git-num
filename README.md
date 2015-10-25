@@ -15,3 +15,7 @@ EXAMPLES:
   git num convert 1-3    # write filenames at indexes 1, 2, 3 to STDOUT
   git num -h             # show this help screen
 ```
+
+# Screenshot
+
+![](https://raw.githubusercontent.com/schreifels/git-num/master/screenshot.jpg)
