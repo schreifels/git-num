@@ -3,11 +3,11 @@ load 'git-num'
 describe GitNum do
   let(:git_status_porcelain) do
     [
-      'XX file1',
-      'XX file2',
-      'XX file3',
-      'XX file4',
-      'XX file5'
+      'M  file1',
+      'M  file2',
+      ' M file3',
+      '?? file4',
+      '?? file5'
     ].join("\n")
   end
 
@@ -23,34 +23,46 @@ describe GitNum do
     let(:git_status) do
       [
         'On branch master',
+        'Changes to be committed:',
+        '  (use "git reset HEAD <file>..." to unstage)',
+        '',
+        "\tmodified:   file1",
+        "\tmodified:   file2",
+        '',
         'Changes not staged for commit:',
         '  (use "git add <file>..." to update what will be committed)',
         '  (use "git checkout -- <file>..." to discard changes in working directory)',
         '',
-        "\tmodified:   file1",
-        "\tmodified:   file2",
         "\tmodified:   file3",
-        "\tmodified:   file4",
-        "\tmodified:   file5",
         '',
-        'no changes added to commit (use "git add" and/or "git commit -a")'
+        'Untracked files:',
+        '  (use "git add <file>..." to include in what will be committed)',
+        '',
+        "\tfile4",
+        "\tfile5"
       ].join("\n")
     end
 
     let(:expected_output) do
       [
         'On branch master',
+        'Changes to be committed:',
+        '  (use "git reset HEAD <file>..." to unstage)',
+        '',
+        "\tmodified:   [1] file1",
+        "\tmodified:   [2] file2",
+        '',
         'Changes not staged for commit:',
         '  (use "git add <file>..." to update what will be committed)',
         '  (use "git checkout -- <file>..." to discard changes in working directory)',
         '',
-        "\tmodified:   [1] file1",
-        "\tmodified:   [2] file2",
         "\tmodified:   [3] file3",
-        "\tmodified:   [4] file4",
-        "\tmodified:   [5] file5",
         '',
-        'no changes added to commit (use "git add" and/or "git commit -a")'
+        'Untracked files:',
+        '  (use "git add <file>..." to include in what will be committed)',
+        '',
+        "\t[4] file4",
+        "\t[5] file5"
       ].join("\n")
     end
 

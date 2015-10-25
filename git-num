@@ -19,8 +19,9 @@ class GitNum
       indexes = filenames_by_index.invert
       status = git_status
 
-      status.gsub!(/(\t)(.+:)(\s+)(.+)/) do
-        $1 + $2 + $3 + '[' + indexes[$4] + '] ' + $4
+      status.gsub!(/(\t)(.+:\s+)?(.+)/) do
+        index = indexes[$3]
+        "#{$1}#{$2}[#{index}] #{$3}"
       end
 
       status
