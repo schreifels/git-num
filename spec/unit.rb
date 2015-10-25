@@ -14,6 +14,10 @@ describe GitNum do
         expect { parse_args }.to output(GitNumFixtures::FIXTURES[name][:annotated_status]).to_stdout
       end
     end
+
+    it 'runs some tests' do
+      expect(GitNumFixtures::FIXTURES.length).to be > 2
+    end
   end
 
   describe 'convert' do
