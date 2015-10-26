@@ -6,14 +6,6 @@ describe GitNum do
     GitNum.parse_args(args.split(' ').map(&:strip))
   end
 
-  describe 'help' do
-    ['-h', '--help', 'help'].each do |flag|
-      it "outputs usage with flag: #{flag}" do
-        expect { parse_args(flag) }.to output(/USAGE:/).to_stdout
-      end
-    end
-  end
-
   describe 'status' do
     FIXTURES.each do |name, fixture|
       it "properly annotates `git status` with indexes in #{name} case" do
@@ -78,6 +70,14 @@ describe GitNum do
       expect { parse_args('convert 6') }.to output('"file still with spaces"').to_stdout
       expect { parse_args('convert 7') }.to output('"file_with_!@#$%_special_chars"').to_stdout
       expect { parse_args('convert 8') }.to output('"file_with_underscores"').to_stdout
+    end
+  end
+
+  describe 'help' do
+    ['-h', '--help', 'help'].each do |flag|
+      it "outputs usage with flag: #{flag}" do
+        expect { parse_args(flag) }.to output(/USAGE:/).to_stdout
+      end
     end
   end
 

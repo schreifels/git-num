@@ -71,7 +71,7 @@ class GitNum
       bold = lambda { |str| "\033[1m#{str}\033[0m" }
 
       [
-        bold.call('NAME: '),
+        bold.call('NAME:'),
         '  git-num - Quickly (un)stage files in Git using numbers',
         '',
         bold.call('USAGE:'),
