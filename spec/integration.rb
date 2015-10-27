@@ -3,7 +3,7 @@ require 'lib/spec_helper'
 SCRIPT = File.join(Dir.pwd, 'git-num')
 
 describe 'GitNum integration with Git' do
-  def gn(cmd='')
+  def git_num(cmd='')
     `#{SCRIPT} #{cmd}`
   end
 
@@ -25,7 +25,7 @@ describe 'GitNum integration with Git' do
     `touch "file9 with 'single' quotes"`
     `touch 'file10_with_!@#$%_special_chars'`
 
-    expect(gn).to include([
+    expect(git_num).to include([
       'Untracked files:',
       '  (use "git add <file>..." to include in what will be committed)',
       '',
@@ -41,9 +41,9 @@ describe 'GitNum integration with Git' do
       "\t" + colorize(:untracked, '[10] file9 with \'single\' quotes')
     ].join("\n"))
 
-    gn('add 1-5 6 7 8-10')
+    git_num('add 1-5 6 7 8-10')
 
-    expect(gn).to include([
+    expect(git_num).to include([
       'Changes to be committed:',
       '  (use "git rm --cached <file>..." to unstage)',
       '',
@@ -61,7 +61,7 @@ describe 'GitNum integration with Git' do
 
     `git commit -m "commit"`
 
-    expect(gn).to eq([
+    expect(git_num).to eq([
       'On branch master',
       'nothing to commit, working directory clean',
       ''
@@ -97,17 +97,17 @@ describe 'GitNum integration with Git' do
     it "handles filename with special characters: #{filenames[:initial]}" do
       `touch #{filenames[:initial]}`
 
-      expect(gn).to include([
+      expect(git_num).to include([
         'Untracked files:',
         '  (use "git add <file>..." to include in what will be committed)',
         '',
         "\t" + colorize(:untracked, '[1] ' + filenames[:initial_expect])
       ].join("\n"))
 
-      gn('add 1')
+      git_num('add 1')
       `git commit -m "commit"`
 
-      expect(gn).to eq([
+      expect(git_num).to eq([
         'On branch master',
         'nothing to commit, working directory clean',
         ''
@@ -116,7 +116,7 @@ describe 'GitNum integration with Git' do
       `git mv #{filenames[:initial]} #{filenames[:renamed]}`
       `echo 'modified' > #{filenames[:renamed]}`
 
-      expect(gn).to include([
+      expect(git_num).to include([
         'Changes to be committed:',
         '  (use "git reset HEAD <file>..." to unstage)',
         '',
@@ -129,9 +129,9 @@ describe 'GitNum integration with Git' do
         "\t" + colorize(:unstaged, 'modified:   [2] ' + filenames[:renamed_expect])
       ].join("\n"))
 
-      gn('reset head 2')
+      git_num('reset head 2')
 
-      expect(gn).to include([
+      expect(git_num).to include([
         'Changes to be committed:',
         '  (use "git reset HEAD <file>..." to unstage)',
         '',
