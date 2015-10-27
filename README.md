@@ -10,7 +10,7 @@ USAGE:
 EXAMPLES:
   git num                # show `git status` with git-num indexes
   git num add 1-3 5      # call `git add` with files at indexes 1, 2, 3, 5
-  git num add README 2   # call `git add` with "README" and file at index 2
+  git num diff README 2  # call `git diff` with "README" and file at index 2
   git num reset head 4   # call `git reset head` with file at index 4
   git num checkout -- 4  # call `git checkout --` with file at index 4
   git num convert 1-3    # write filenames at indexes 1, 2, 3 to STDOUT
@@ -49,6 +49,10 @@ alias grh="git num reset head"
 __git_complete grh _git_reset
 alias gco="git num checkout"
 __git_complete gco _git_checkout
+alias gd="git num diff"
+__git_complete gd _git_diff
+alias gds="git num diff --staged"
+__git_complete gds _git_diff
 ```
 
 You can also use git-num in conjunction with non-git commands, e.g.:
