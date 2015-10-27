@@ -75,7 +75,7 @@ class GitNum
         '  git-num - Quickly (un)stage files in Git using numbers',
         '',
         bold.call('USAGE:'),
-        bold.call('  git num') + ' [git_cmd [index...] | ' + bold.call('convert') +' index... | ' + bold.call('-h') + ']',
+        bold.call('  git num') + ' [git_cmd [index ...] | ' + bold.call('convert') +' [index ...] | ' + bold.call('-h') + ']',
         '',
         bold.call('EXAMPLES:'),
         '  git num                # show `git status` with git-num indexes',

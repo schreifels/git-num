@@ -5,7 +5,7 @@ NAME:
   git-num - Quickly (un)stage files in Git using numbers
 
 USAGE:
-  git num [git_cmd [index...] | convert index... | -h]
+  git num [git_cmd [index ...] | convert [index ...] | -h]
 
 EXAMPLES:
   git num                # show `git status` with git-num indexes
