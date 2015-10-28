@@ -44,15 +44,10 @@ e.g.:
 
 ```bash
 alias ga="git num add"
-__git_complete ga _git_add
 alias grh="git num reset head"
-__git_complete grh _git_reset
 alias gco="git num checkout"
-__git_complete gco _git_checkout
 alias gd="git num diff"
-__git_complete gd _git_diff
 alias gds="git num diff --staged"
-__git_complete gds _git_diff
 ```
 
 You can also use git-num in conjunction with non-git commands, e.g.:
