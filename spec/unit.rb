@@ -8,19 +8,22 @@ describe GitNum do
   end
 
   before(:each) do
-    allow(GitNum).to receive(:git_status).and_return(FIXTURES[:basic][:status])
+    allow(GitNum).to receive(:git_status).and_return(FIXTURES[:basic][:git_status])
   end
 
   describe 'status' do
     FIXTURES.each do |name, fixture|
       it "properly annotates `git status` with indexes in #{name} case" do
-        allow(GitNum).to receive(:git_status).and_return(FIXTURES[name][:status])
-        expect { parse_args }.to output(FIXTURES[name][:annotated_status]).to_stdout
+        git_status      = FIXTURES[name][:git_status]
+        expected_output = FIXTURES[name][:annotated_status]
+
+        allow(GitNum).to receive(:git_status).and_return(git_status)
+        expect { parse_args }.to output(expected_output).to_stdout
       end
     end
 
     it 'runs some tests' do
-      expect(FIXTURES.length).to be > 2
+      expect(FIXTURES.length).to be > 3
     end
   end
 
@@ -51,24 +54,24 @@ describe GitNum do
           output('file1').to_stdout
       expect { parse_args('convert 1-3') }.to \
           output('file1 file2 file3').to_stdout
-      expect { parse_args('convert 1-3 6 7-10') }.to \
-          output('file1 file2 file3 file6 file7 file8 file9 file10').to_stdout
+      expect { parse_args('convert 1-3 6 7-9') }.to \
+          output('file1 file2 file3 file6 file7 file8 file9').to_stdout
       expect { parse_args('convert 3-4 6 1-5') }.to \
           output('file3 file4 file6 file1 file2 file3 file4 file5').to_stdout
-      expect { parse_args('convert 10-15') }.to \
-          output('file10 11 12 13 14 15').to_stdout
+      expect { parse_args('convert 9-12') }.to \
+          output('file9 10 11 12').to_stdout
     end
 
     it 'supports special characters' do
-      allow(GitNum).to receive(:git_status).and_return(FIXTURES[:special_characters][:status])
+      allow(GitNum).to receive(:git_status).and_return(FIXTURES[:special_characters][:git_status])
       expect { parse_args('convert 1') }.to output('"file with \\"double\\" quotes"').to_stdout
       expect { parse_args('convert 2') }.to output('"file still with \\"double\\" quotes"').to_stdout
       expect { parse_args('convert 3') }.to output(Shellwords.escape("file with 'single' quotes")).to_stdout
       expect { parse_args('convert 4') }.to output(Shellwords.escape("file still with 'single' quotes")).to_stdout
       expect { parse_args('convert 5') }.to output(Shellwords.escape('file with spaces')).to_stdout
       expect { parse_args('convert 6') }.to output(Shellwords.escape('file still with spaces')).to_stdout
-      expect { parse_args('convert 10') }.to output(Shellwords.escape('file_with_!@#$%_special_chars')).to_stdout
-      expect { parse_args('convert 11') }.to output(Shellwords.escape('file_with_underscores')).to_stdout
+      expect { parse_args('convert 13') }.to output(Shellwords.escape('file_with_!@#$%_special_chars')).to_stdout
+      expect { parse_args('convert 14') }.to output(Shellwords.escape('file_with_underscores')).to_stdout
     end
   end
 

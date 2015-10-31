@@ -9,7 +9,7 @@ class GitNum
     def parse_args(args)
       case args[0]
       when nil
-        print parse_status[:annotated]
+        print parse_status[:annotated_status]
       when 'convert'
         print convert(args.drop(1))
       when '-h', '--help', 'help'
@@ -55,7 +55,7 @@ class GitNum
       i = 0
       filenames_by_index = {}
 
-      annotated = git_status.gsub(/(\t)(\e\[[0-9]+m)(.+:\s+)?(.+)(\e\[m)/) do
+      annotated_status = git_status.gsub(/(\t)(\e\[[0-9]+m)(.+:\s+)?(.+)(\e\[m)/) do
         tab, start_color, description, filenames, end_color = $1, $2, $3, $4, $5
 
         filenames = filenames.split(' -> ').map do |filename|
@@ -68,7 +68,7 @@ class GitNum
       end
 
       {
-        annotated: annotated,
+        annotated_status: annotated_status,
         filenames_by_index: filenames_by_index
       }
     end
