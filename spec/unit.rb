@@ -80,6 +80,14 @@ describe GitNum do
     end
   end
 
+  describe 'version' do
+    ['-v', '--version', 'version'].each do |flag|
+      it "outputs version with flag: #{flag}" do
+        expect { parse_args(flag) }.to output(/git-num version .+/).to_stdout
+      end
+    end
+  end
+
   describe 'arbitrary git command execution' do
     it 'supports any git command' do
       expect(GitNum).to receive(:exec).ordered.with('git add file1 file2 file3')

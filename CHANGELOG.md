@@ -7,6 +7,7 @@
 * Rather than naively wrapping filenames in double quotes (and escaping quotes
   in the filename, if any), git-num now escapes filenames using the native Ruby
   [shellwords library](http://ruby-doc.org/stdlib-2.2.2/libdoc/shellwords/rdoc/Shellwords.html).
+* Added `-v` version option.
 
 # 1.1.0
 * When executing a git command, the git process will now replace the git-num
