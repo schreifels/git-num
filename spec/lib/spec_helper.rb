@@ -1,11 +1,11 @@
 def colorize(section, str)
   i = case section
       when :staged
-        33
+        33 # yellow
       when :unstaged
-        32
+        32 # green
       when :untracked
-        36
+        36 # cyan
       else
         raise "Unknown section: #{section}"
       end

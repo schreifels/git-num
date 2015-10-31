@@ -11,6 +11,9 @@ describe 'GitNum integration with Git' do
     Dir.mktmpdir do |tmpdir|
       Dir.chdir(tmpdir) do
         `git init .`
+        `git config color.status.added "yellow"`
+        `git config color.status.changed "green"`
+        `git config color.status.untracked "cyan"`
         examples.run
       end
     end
