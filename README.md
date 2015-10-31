@@ -27,7 +27,7 @@ maintain whatever color scheme you use.)
 # Installation
 
 Simply download the
-[git-num executable](https://raw.githubusercontent.com/schreifels/git-num/master/git-num),
+[git-num executable](https://github.com/schreifels/git-num/releases),
 place it in a directory that is in your `PATH`, and `chmod +x git-num`. Git will
 automatically use this executable when you call `git num`.
 
