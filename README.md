@@ -22,7 +22,7 @@ EXAMPLES:
 git-num works by annotating the output of `git status` with numbers. (It will
 maintain whatever color scheme you use.)
 
-<img src="https://raw.githubusercontent.com/schreifels/git-num/master/screenshot.jpg" width="550" alt="">
+<img src="https://raw.githubusercontent.com/schreifels/git-num/master/screenshot.png" width="550" alt="">
 
 # Installation
 

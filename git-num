@@ -1,11 +1,13 @@
 #!/usr/bin/ruby
 
+require 'shellwords'
+
 class GitNum
   class << self
     def parse_args(args)
       case args[0]
       when nil
-        print status
+        print parse_status[:annotated]
       when 'convert'
         print convert(args.drop(1))
       when '-h', '--help', 'help'
@@ -17,54 +19,58 @@ class GitNum
 
     private
 
-    def status
-      indexes = filenames_by_index.invert
+    def convert(indexes)
+      filenames_by_index = parse_status[:filenames_by_index]
 
-      git_status.gsub(/(\t)(\e\[[0-9]+m)(.+:\s+)?(.+)(\e\[m)/) do
-        tab, start_color, description, filenames, end_color = $1, $2, $3, $4, $5
-
-        filenames = filenames.split(' -> ').map do |filename|
-          index = indexes[filename.gsub(/\A"|"\z/, '')] || '?'
-          "[#{index}] #{filename}"
-        end.join(' -> ')
-
-        "#{tab}#{start_color}#{description}#{filenames}#{end_color}"
+      expanded_indexes = expand_index_ranges(indexes)
+      filenames = expanded_indexes.map do |index|
+        # Pass-through for any unrecognized indexes to support commands like
+        # `git num add file1` and `git num add -A`
+        filenames_by_index[index] ? filename_for_cmd(filenames_by_index[index]) : index
       end
+
+      filenames.join(' ')
     end
 
-    def convert(indexes)
-      filenames = filenames_by_index
-
-      expanded_indexes = indexes.map do |index|
+    def expand_index_ranges(indexes)
+      indexes.map do |index|
         if range = index.match(/([0-9]+)-([0-9]+)/)
           (range[1]..range[2]).to_a
         else
           index
         end
       end.flatten
-
-      expanded_indexes.map do |index|
-        filenames[index] ? "\"#{filenames[index]}\"" : index
-      end.join(' ')
     end
 
-    def filenames_by_index
+    def filename_for_cmd(filename)
+      # If git quoted the filename, we don't need to escape it ourselves
+      (filename =~ /\A".+"\z/) ? filename : Shellwords.escape(filename)
+    end
+
+    def parse_status
       i = 0
-      git_status_porcelain.split("\n").reduce({}) do |filenames, status_line|
-        status_line[3..-1].split(' -> ').each do |filename|
+      filenames_by_index = {}
+
+      annotated = git_status.gsub(/(\t)(\e\[[0-9]+m)(.+:\s+)?(.+)(\e\[m)/) do
+        tab, start_color, description, filenames, end_color = $1, $2, $3, $4, $5
+
+        filenames = filenames.split(' -> ').map do |filename|
           i += 1
-          filenames[i.to_s] = filename.gsub(/\A"|"\z/, '')
-        end
-        filenames
+          filenames_by_index[i.to_s] = filename
+          "[#{i}] #{filename}"
+        end.join(' -> ')
+
+        "#{tab}#{start_color}#{description}#{filenames}#{end_color}"
       end
+
+      {
+        annotated: annotated,
+        filenames_by_index: filenames_by_index
+      }
     end
 
     def git_status
       `git -c color.status=always status --long`
-    end
-
-    def git_status_porcelain
-      `git status --porcelain`
     end
 
     def help

@@ -129,7 +129,7 @@ describe 'GitNum integration with Git' do
         '  (use "git add <file>..." to update what will be committed)',
         '  (use "git checkout -- <file>..." to discard changes in working directory)',
         '',
-        "\t" + colorize(:unstaged, 'modified:   [2] ' + filenames[:renamed_expect])
+        "\t" + colorize(:unstaged, 'modified:   [3] ' + filenames[:renamed_expect])
       ].join("\n"))
 
       git_num('reset head 2')

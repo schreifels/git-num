@@ -87,11 +87,6 @@ FIXTURES[:basic] = {
 ################################################################################
 
 FIXTURES[:directories] = {
-  porcelain: [
-    'XX dir1/file',
-    'XX dir2/'
-  ].join("\n"),
-
   status: [
     'On branch master',
     'Changes not staged for commit:',
@@ -123,43 +118,7 @@ FIXTURES[:directories] = {
 
 ################################################################################
 
-FIXTURES[:missing_index] = {
-  porcelain: [
-    'XX file1'
-  ].join("\n"),
-
-  status: [
-    'On branch master',
-    'Changes not staged for commit:',
-    '  (use "git add <file>..." to update what will be committed)',
-    '  (use "git checkout -- <file>..." to discard changes in working directory)',
-    '',
-    "\t" + colorize(:unstaged, 'modified:   file1'),
-    "\t" + colorize(:unstaged, 'modified:   file2'),
-    '',
-    'no changes added to commit (use "git add" and/or "git commit -a")'
-  ].join("\n"),
-
-  annotated_status: [
-    'On branch master',
-    'Changes not staged for commit:',
-    '  (use "git add <file>..." to update what will be committed)',
-    '  (use "git checkout -- <file>..." to discard changes in working directory)',
-    '',
-    "\t" + colorize(:unstaged, 'modified:   [1] file1'),
-    "\t" + colorize(:unstaged, 'modified:   [?] file2'),
-    '',
-    'no changes added to commit (use "git add" and/or "git commit -a")'
-  ].join("\n")
-}
-
-################################################################################
-
 FIXTURES[:renames] = {
-  porcelain: [
-    'XX file1 -> file2'
-  ].join("\n"),
-
   status: [
     'On branch master',
     'Changes to be committed:',
@@ -185,21 +144,13 @@ FIXTURES[:renames] = {
     '  (use "git add <file>..." to update what will be committed)',
     '  (use "git checkout -- <file>..." to discard changes in working directory)',
     '',
-    "\t" + colorize(:unstaged, 'modified:   [2] file2')
+    "\t" + colorize(:unstaged, 'modified:   [3] file2')
   ].join("\n")
 }
 
 ################################################################################
 
 FIXTURES[:special_characters] = {
-  porcelain: [
-    'XX "file with \"double\" quotes" -> "file still with \"double\" quotes"',
-    'XX "file with \'single\' quotes" -> "file still with \'single\' quotes"',
-    'XX "file with spaces" -> "file still with spaces"',
-    'XX file_with_!@#$%_special_chars',
-    'XX file_with_underscores'
-  ].join("\n"),
-
   status: [
     'On branch master',
     'Changes to be committed:',
@@ -237,14 +188,14 @@ FIXTURES[:special_characters] = {
     '  (use "git add <file>..." to update what will be committed)',
     '  (use "git checkout -- <file>..." to discard changes in working directory)',
     '',
-    "\t" + colorize(:unstaged, 'modified:   [2] "file still with \\"double\\" quotes"'),
-    "\t" + colorize(:unstaged, 'modified:   [4] file still with \'single\' quotes'),
-    "\t" + colorize(:unstaged, 'modified:   [6] file still with spaces'),
+    "\t" + colorize(:unstaged, 'modified:   [7] "file still with \\"double\\" quotes"'),
+    "\t" + colorize(:unstaged, 'modified:   [8] file still with \'single\' quotes'),
+    "\t" + colorize(:unstaged, 'modified:   [9] file still with spaces'),
     '',
     'Untracked files:',
     '  (use "git add <file>..." to include in what will be committed)',
     '',
-    "\t" + colorize(:untracked, '[7] file_with_!@#$%_special_chars'),
-    "\t" + colorize(:untracked, '[8] file_with_underscores')
+    "\t" + colorize(:untracked, '[10] file_with_!@#$%_special_chars'),
+    "\t" + colorize(:untracked, '[11] file_with_underscores')
   ].join("\n")
 }
