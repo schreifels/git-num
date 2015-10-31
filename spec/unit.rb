@@ -1,5 +1,4 @@
 load 'git-num'
-
 require 'lib/spec_helper'
 
 describe GitNum do

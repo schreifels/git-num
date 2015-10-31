@@ -23,17 +23,37 @@ class GitNum
 
     private
 
-    def convert(indexes)
-      filenames_by_index = parse_status[:filenames_by_index]
+    def parse_status
+      filenames_by_index = {}
+      index = 0
 
-      expanded_indexes = expand_index_ranges(indexes)
-      filenames = expanded_indexes.map do |index|
-        # Pass-through for any unrecognized indexes to support commands like
-        # `git num add file1` and `git num add -A`
-        filenames_by_index[index] ? filename_for_cmd(filenames_by_index[index]) : index
+      annotated_status = git_status.gsub(/(\t)(\e\[[0-9]+m)(.+:\s+)?(.+)(\e\[m)/) do
+        tab, start_color, description, filenames, end_color = $1, $2, $3, $4, $5
+
+        filenames = filenames.split(' -> ').map do |filename|
+          index += 1
+          filenames_by_index[index.to_s] = filename
+          "[#{index}] #{filename}"
+        end.join(' -> ')
+
+        "#{tab}#{start_color}#{description}#{filenames}#{end_color}"
       end
 
-      filenames.join(' ')
+      {
+        annotated_status: annotated_status,
+        filenames_by_index: filenames_by_index
+      }
+    end
+
+    def convert(indexes)
+      filenames_by_index = parse_status[:filenames_by_index]
+      expanded_indexes = expand_index_ranges(indexes)
+
+      expanded_indexes.map do |index|
+        # Pass-through any unrecognized indexes to support commands like
+        # `git num add file1` and `git num add -A`
+        filenames_by_index[index] ? filename_for_cmd(filenames_by_index[index]) : index
+      end.join(' ')
     end
 
     def expand_index_ranges(indexes)
@@ -49,32 +69,6 @@ class GitNum
     def filename_for_cmd(filename)
       # If git quoted the filename, we don't need to escape it ourselves
       (filename =~ /\A".+"\z/) ? filename : Shellwords.escape(filename)
-    end
-
-    def parse_status
-      i = 0
-      filenames_by_index = {}
-
-      annotated_status = git_status.gsub(/(\t)(\e\[[0-9]+m)(.+:\s+)?(.+)(\e\[m)/) do
-        tab, start_color, description, filenames, end_color = $1, $2, $3, $4, $5
-
-        filenames = filenames.split(' -> ').map do |filename|
-          i += 1
-          filenames_by_index[i.to_s] = filename
-          "[#{i}] #{filename}"
-        end.join(' -> ')
-
-        "#{tab}#{start_color}#{description}#{filenames}#{end_color}"
-      end
-
-      {
-        annotated_status: annotated_status,
-        filenames_by_index: filenames_by_index
-      }
-    end
-
-    def git_status
-      `git -c color.status=always status --long`
     end
 
     def help
@@ -99,6 +93,10 @@ class GitNum
         '  git num -h             # show this help screen',
         '  git num -v             # show version'
       ].join("\n")
+    end
+
+    def git_status
+      `git -c color.status=always status --long`
     end
   end
 end
