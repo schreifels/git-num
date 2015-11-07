@@ -53,10 +53,12 @@ alias gds="git num diff --staged"
 You can also use git-num in conjunction with non-git commands, e.g.:
 
 ```bash
+# `ber 2` => execute `bundle exec rspec [file at index 2]`
 function ber() { git num convert "$@" | xargs bundle exec rspec; }
-```
 
-will cause `ber 2` to execute `bundle exec rspec [file at index 2]`.
+# `gnc 2` => copy file at index 2 to Mac clipboard
+function gnc() { git num convert "$@" | pbcopy; }
+```
 
 # Goal
 
