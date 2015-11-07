@@ -44,7 +44,7 @@ e.g.:
 
 ```bash
 alias ga="git num add"
-alias grh="git num reset head"
+alias gr="git num reset"
 alias gco="git num checkout"
 alias gd="git num diff"
 alias gds="git num diff --staged"
