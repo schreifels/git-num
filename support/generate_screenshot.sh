@@ -2,7 +2,7 @@
 
 # Setup ########################################################################
 
-PS1="$ "
+PS1="~/sample-git-project $ "
 mkdir git-num-sample-repo
 cd git-num-sample-repo
 git init .

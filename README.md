@@ -5,7 +5,7 @@ NAME:
   git-num - Quickly (un)stage files in Git using numbers
 
 USAGE:
-  git num [git_cmd [index ...] | convert [index ...] | -h]
+  git num [git_cmd [index ...] | convert [index ...] | -h | -v]
 
 EXAMPLES:
   git num                # show `git status` with git-num indexes
@@ -15,6 +15,7 @@ EXAMPLES:
   git num checkout -- 4  # call `git checkout --` with file at index 4
   git num convert 1-3    # write filenames at indexes 1, 2, 3 to STDOUT
   git num -h             # show this help screen
+  git num -v             # show version
 ```
 
 # Screenshot
@@ -22,7 +23,7 @@ EXAMPLES:
 git-num works by annotating the output of `git status` with numbers. (It will
 maintain whatever color scheme you use.)
 
-<img src="https://raw.githubusercontent.com/schreifels/git-num/master/screenshot.jpg" width="550" alt="">
+<img src="https://raw.githubusercontent.com/schreifels/git-num/master/screenshot.png" width="550" alt="">
 
 # Installation
 
