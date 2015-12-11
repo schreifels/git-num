@@ -8,8 +8,9 @@
 #       note at the top of the file.
 
 require 'tmpdir'
+require_relative 'colors'
 
-FIXTURES_PATH = File.join(File.dirname(__FILE__), 'spec', 'fixtures')
+FIXTURES_PATH = File.join(File.dirname(__FILE__), '..', 'spec', 'fixtures')
 `rm -rf #{FIXTURES_PATH}`
 `mkdir #{FIXTURES_PATH}`
 
@@ -21,9 +22,9 @@ def create_fixture(name)
       `git init .`
       `git commit --allow-empty -m "Initial commit"`
 
-      `git config color.status.added "yellow"`
-      `git config color.status.changed "green"`
-      `git config color.status.untracked "cyan"`
+      `git config color.status.added "#{ADDED_COLOR}"`
+      `git config color.status.changed "#{CHANGED_COLOR}"`
+      `git config color.status.untracked "#{UNTRACKED_COLOR}"`
 
       yield
       git_status_output = `git -c color.status=always status --long`

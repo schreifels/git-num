@@ -1,5 +1,6 @@
 require 'tmpdir'
 require 'lib/spec_helper'
+require_relative '../support/colors'
 
 SCRIPT = File.join(Dir.pwd, 'git-num')
 
@@ -12,9 +13,9 @@ describe 'GitNum integration with Git' do
     Dir.mktmpdir do |tmpdir|
       Dir.chdir(tmpdir) do
         `git init .`
-        `git config color.status.added "yellow"`
-        `git config color.status.changed "green"`
-        `git config color.status.untracked "cyan"`
+        `git config color.status.added "#{ADDED_COLOR}"`
+        `git config color.status.changed "#{CHANGED_COLOR}"`
+        `git config color.status.untracked "#{UNTRACKED_COLOR}"`
         examples.run
       end
     end
@@ -51,16 +52,16 @@ describe 'GitNum integration with Git' do
       'Changes to be committed:',
       '  (use "git rm --cached <file>..." to unstage)',
       '',
-      "\t" + colorize(:staged, 'new file:   [1] dir1/file6'),
-      "\t" + colorize(:staged, 'new file:   [2] file1'),
-      "\t" + colorize(:staged, 'new file:   [3] file10_with_!@#$%_special_chars'),
-      "\t" + colorize(:staged, 'new file:   [4] file2'),
-      "\t" + colorize(:staged, 'new file:   [5] file3'),
-      "\t" + colorize(:staged, 'new file:   [6] file4'),
-      "\t" + colorize(:staged, 'new file:   [7] file5'),
-      "\t" + colorize(:staged, 'new file:   [8] file7 with spaces'),
-      "\t" + colorize(:staged, 'new file:   [9] "file8 with \\"double\\" quotes"'),
-      "\t" + colorize(:staged, 'new file:   [10] file9 with \'single\' quotes')
+      "\t" + colorize(:added, 'new file:   [1] dir1/file6'),
+      "\t" + colorize(:added, 'new file:   [2] file1'),
+      "\t" + colorize(:added, 'new file:   [3] file10_with_!@#$%_special_chars'),
+      "\t" + colorize(:added, 'new file:   [4] file2'),
+      "\t" + colorize(:added, 'new file:   [5] file3'),
+      "\t" + colorize(:added, 'new file:   [6] file4'),
+      "\t" + colorize(:added, 'new file:   [7] file5'),
+      "\t" + colorize(:added, 'new file:   [8] file7 with spaces'),
+      "\t" + colorize(:added, 'new file:   [9] "file8 with \\"double\\" quotes"'),
+      "\t" + colorize(:added, 'new file:   [10] file9 with \'single\' quotes')
     ].join("\n"))
 
     `git commit -m "commit"`
@@ -124,13 +125,13 @@ describe 'GitNum integration with Git' do
         'Changes to be committed:',
         '  (use "git reset HEAD <file>..." to unstage)',
         '',
-        "\t" + colorize(:staged, 'renamed:    [1] ' + filenames[:initial_expect] + ' -> [2] ' + filenames[:renamed_expect]),
+        "\t" + colorize(:added, 'renamed:    [1] ' + filenames[:initial_expect] + ' -> [2] ' + filenames[:renamed_expect]),
         '',
         'Changes not staged for commit:',
         '  (use "git add <file>..." to update what will be committed)',
         '  (use "git checkout -- <file>..." to discard changes in working directory)',
         '',
-        "\t" + colorize(:unstaged, 'modified:   [3] ' + filenames[:renamed_expect])
+        "\t" + colorize(:changed, 'modified:   [3] ' + filenames[:renamed_expect])
       ].join("\n"))
 
       git_num('reset head 2')
@@ -139,7 +140,7 @@ describe 'GitNum integration with Git' do
         'Changes to be committed:',
         '  (use "git reset HEAD <file>..." to unstage)',
         '',
-        "\t" + colorize(:staged, 'deleted:    [1] ' + filenames[:initial_expect]),
+        "\t" + colorize(:added, 'deleted:    [1] ' + filenames[:initial_expect]),
         '',
         'Untracked files:',
         '  (use "git add <file>..." to include in what will be committed)',
