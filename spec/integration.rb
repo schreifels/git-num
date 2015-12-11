@@ -1,3 +1,4 @@
+require 'tmpdir'
 require 'lib/spec_helper'
 
 SCRIPT = File.join(Dir.pwd, 'git-num')
