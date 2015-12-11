@@ -76,7 +76,7 @@ class GitNum
 
       [
         bold.call('NAME:'),
-        '  git-num - Quickly (un)stage files in Git using numbers',
+        '  git-num - Quickly reference files in Git using numbers',
         '',
         bold.call('USAGE:'),
         bold.call('  git num') << ' [git_cmd [index ...] | ' <<
