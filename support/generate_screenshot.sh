@@ -23,10 +23,10 @@ touch README
 git add -A
 git commit -m "Initial commit"
 
-echo 'modified' > app/controllers/widgets_controller.rb
-echo 'modified' > spec/controllers/widgets_controller_spec.rb
-echo 'modified' > app/models/widget.rb
-echo 'modified' > spec/models/widget_spec.rb
+echo "modified" > app/controllers/widgets_controller.rb
+echo "modified" > spec/controllers/widgets_controller_spec.rb
+echo "modified" > app/models/widget.rb
+echo "modified" > spec/models/widget_spec.rb
 touch app/helpers/widget_helper.rb
 
 git mv README README.md

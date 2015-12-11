@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
-# Generates test fixtures with git. Replaces the fixtures/ directory on each
-# run. For each fixture, two files are created:
+# Generates test fixtures with git. Replaces the spec/fixtures/ directory on
+# each run. For each fixture, two files are created:
 #   1.) Contains the output of `git status`
 #   2.) Placeholder for the expected output of `git num`. Must be manually
 #       edited with annotations. Don't forget to remove the "TODO: ANNOTATE"
