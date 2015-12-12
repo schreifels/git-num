@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Script to generate a sample git project for a screenshot demonstrating git-num
 
 # Setup ########################################################################
