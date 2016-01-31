@@ -50,7 +50,7 @@ class GitNum
       expanded_indexes = expand_index_ranges(indexes)
 
       expanded_indexes.map do |index|
-        # Pass-through any unrecognized indexes to support commands like
+        # Pass through any unrecognized indexes to support commands like
         # `git num add file1` and `git num add -A`
         filenames_by_index[index] ? filename_for_cmd(filenames_by_index[index]) : index
       end.join(' ')
