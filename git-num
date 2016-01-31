@@ -2,7 +2,7 @@
 
 require 'shellwords'
 
-VERSION = '2.0.0'
+VERSION = 'master (post-2.0.0)'
 
 class GitNum
   class << self
