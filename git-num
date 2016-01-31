@@ -17,7 +17,7 @@ class GitNum
       when '-v', '--version', 'version'
         puts "git-num version #{VERSION}"
       else
-        exec("git #{args[0]} #{convert(args.drop(1))}")
+        system("git #{args[0]} #{convert(args.drop(1))}")
       end
     end
 

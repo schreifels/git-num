@@ -115,16 +115,16 @@ describe GitNum do
 
   describe 'arbitrary git command execution' do
     it 'supports any git command' do
-      expect(GitNum).to receive(:exec).ordered.with('git add file1 file2 file3')
+      expect(GitNum).to receive(:system).ordered.with('git add file1 file2 file3')
       parse_args('add 1 file2 3')
 
-      expect(GitNum).to receive(:exec).ordered.with('git reset head file1 file2 file3')
+      expect(GitNum).to receive(:system).ordered.with('git reset head file1 file2 file3')
       parse_args('reset head 1 file2 3')
 
-      expect(GitNum).to receive(:exec).ordered.with('git checkout -- file1 file2 file3')
+      expect(GitNum).to receive(:system).ordered.with('git checkout -- file1 file2 file3')
       parse_args('checkout -- 1 file2 3')
 
-      expect(GitNum).to receive(:exec).ordered.with('git custom-cmd file1 file2 file3')
+      expect(GitNum).to receive(:system).ordered.with('git custom-cmd file1 file2 file3')
       parse_args('custom-cmd 1 file2 3')
     end
   end

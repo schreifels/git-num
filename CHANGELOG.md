@@ -7,6 +7,8 @@
 * Rather than naively wrapping filenames in double quotes (and escaping quotes
   in the filename, if any), git-num now escapes filenames using the native Ruby
   [shellwords library](http://ruby-doc.org/stdlib-2.2.2/libdoc/shellwords/rdoc/Shellwords.html).
+* Git commands are now executed in a subshell, which prevents Git from
+  complaining about broken pipes when exiting from a large diff. Fixes issue #5.
 * Added `-v` version option.
 * Substantial improvements were made to the unit and integration test suites.
 
