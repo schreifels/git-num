@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# Script to generate a sample git project for a screenshot demonstrating git-num
+# Generates a sample git project for a screenshot demonstrating git-num
 
 # Setup ########################################################################
 

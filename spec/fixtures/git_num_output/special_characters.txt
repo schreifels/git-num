@@ -5,7 +5,7 @@ Changes to be committed:
 	[33mrenamed:    [1] "file with \"double\" quotes" -> [2] "file still with \"double\" quotes"[m
 	[33mrenamed:    [3] file with 'single' quotes -> [4] file still with 'single' quotes[m
 	[33mrenamed:    [5] file with spaces -> [6] file still with spaces[m
-	[33mrenamed:    [7] "file\\with\backslashes" -> [8] "file\\still\\with\backslashes"[m
+	[33mrenamed:    [7] "file\\\\with\\backslashes" -> [8] "file\\\\still\\\\with\\backslashes"[m
 
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
@@ -14,7 +14,7 @@ Changes not staged for commit:
 	[32mmodified:   [9] "file still with \"double\" quotes"[m
 	[32mmodified:   [10] file still with 'single' quotes[m
 	[32mmodified:   [11] file still with spaces[m
-	[32mmodified:   [12] "file\\still\\with\backslashes"[m
+	[32mmodified:   [12] "file\\\\still\\\\with\\backslashes"[m
 
 Untracked files:
   (use "git add <file>..." to include in what will be committed)

@@ -40,7 +40,7 @@ It's handy to create an alias for `git num`:
 alias gn="git num"
 ```
 
-You can take this a step further if you have aliases for other git commands,
+You can take this a step further if you have aliases for other Git commands,
 e.g.:
 
 ```bash
@@ -51,7 +51,7 @@ alias gd="git num diff"
 alias gds="git num diff --staged"
 ```
 
-You can also use git-num in conjunction with non-git commands, e.g.:
+You can also use git-num in conjunction with non-Git commands, e.g.:
 
 ```bash
 # `ber 2` => execute `bundle exec rspec [file at index 2]`
