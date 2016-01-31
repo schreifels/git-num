@@ -1,4 +1,4 @@
-# 2.0.0 (not released)
+# 2.0.0
 * git-num annotations will now always be ordered sequentially from top to
   bottom, even if one filename appears multiple times. (Previously the numbers
   would be based on a psuedo-alphabetical sort of the paths with duplicates
