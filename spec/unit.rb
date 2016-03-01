@@ -72,6 +72,11 @@ describe GitNum do
           output('file3 file4 file6 file1 file2 file3 file4 file5').to_stdout
       expect { parse_args('convert 9-12') }.to \
           output('file9 10 11 12').to_stdout
+
+      expect { parse_args('convert abc123-456') }.to \
+          output('abc123-456').to_stdout
+      expect { parse_args('convert 123-456abc') }.to \
+          output('123-456abc').to_stdout
     end
 
     it 'supports special characters' do

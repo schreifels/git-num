@@ -1,3 +1,6 @@
+* Fixed a bug where `git num convert abc123-456` would be interpreted as "abc"
+  followed by a range.
+
 # 2.0.0
 * git-num annotations will now always be ordered sequentially from top to
   bottom, even if one filename appears multiple times. (Previously the numbers

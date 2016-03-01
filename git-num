@@ -58,7 +58,7 @@ class GitNum
 
     def expand_index_ranges(indexes)
       indexes.map do |index|
-        if range = index.match(/([0-9]+)-([0-9]+)/)
+        if range = index.match(/\A([0-9]+)-([0-9]+)\Z/)
           (range[1]..range[2]).to_a
         else
           index
