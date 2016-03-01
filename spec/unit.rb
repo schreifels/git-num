@@ -123,8 +123,8 @@ describe GitNum do
       expect(GitNum).to receive(:system).ordered.with('git add file1 file2 file3')
       parse_args('add 1 file2 3')
 
-      expect(GitNum).to receive(:system).ordered.with('git reset head file1 file2 file3')
-      parse_args('reset head 1 file2 3')
+      expect(GitNum).to receive(:system).ordered.with('git reset HEAD file1 file2 file3')
+      parse_args('reset HEAD 1 file2 3')
 
       expect(GitNum).to receive(:system).ordered.with('git checkout -- file1 file2 file3')
       parse_args('checkout -- 1 file2 3')

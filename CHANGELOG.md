@@ -1,3 +1,5 @@
+# Unreleased
+* Added support for Git 1.7.9+.
 * Fixed a bug where `git num convert abc123-456` would be interpreted as "abc"
   followed by a range.
 
@@ -18,7 +20,7 @@
 # 1.1.0
 * When executing a Git command, the Git process will now replace the git-num
   process. This has two effects: 1.) the user will see the output of commands
-  that write to STDOUT (e.g. `git num reset head` in some cases), and 2.)
+  that write to STDOUT (e.g. `git num reset HEAD` in some cases), and 2.)
   commands which read from STDIN will work as expected (e.g. `git num diff` and
   `git num add --patch`).
 

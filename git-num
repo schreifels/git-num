@@ -87,7 +87,7 @@ class GitNum
         '  git num                # show `git status` with git-num indexes',
         '  git num add 1-3 5      # call `git add` with files at indexes 1, 2, 3, 5',
         '  git num diff README 2  # call `git diff` with "README" and file at index 2',
-        '  git num reset head 4   # call `git reset head` with file at index 4',
+        '  git num reset HEAD 4   # call `git reset HEAD` with file at index 4',
         '  git num checkout -- 4  # call `git checkout --` with file at index 4',
         '  git num convert 1-3    # write filenames at indexes 1, 2, 3 to STDOUT',
         '  git num -h             # show this help screen',
@@ -96,7 +96,7 @@ class GitNum
     end
 
     def git_status
-      `git -c color.status=always status --long`
+      `git -c color.status=always -c status.short=false status`
     end
   end
 end

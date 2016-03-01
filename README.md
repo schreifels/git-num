@@ -11,7 +11,7 @@ EXAMPLES:
   git num                # show `git status` with git-num indexes
   git num add 1-3 5      # call `git add` with files at indexes 1, 2, 3, 5
   git num diff README 2  # call `git diff` with "README" and file at index 2
-  git num reset head 4   # call `git reset head` with file at index 4
+  git num reset HEAD 4   # call `git reset HEAD` with file at index 4
   git num checkout -- 4  # call `git checkout --` with file at index 4
   git num convert 1-3    # write filenames at indexes 1, 2, 3 to STDOUT
   git num -h             # show this help screen
@@ -26,6 +26,8 @@ maintain whatever color scheme you use.)
 <img src="https://raw.githubusercontent.com/schreifels/git-num/master/screenshot.png" width="550" alt="">
 
 # Installation
+
+git-num is tested on OSX and Linux. It requires Git 1.7.9+ and Ruby 1.9.3+.
 
 Simply download the
 [git-num executable](https://github.com/schreifels/git-num/releases),
