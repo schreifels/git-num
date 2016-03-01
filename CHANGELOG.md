@@ -2,6 +2,7 @@
 * Added support for Git 1.7.9+.
 * Fixed a bug where `git num convert abc123-456` would be interpreted as "abc"
   followed by a range.
+* Added troubleshooting instructions to the README.
 
 # 2.0.0
 * git-num annotations will now always be ordered sequentially from top to

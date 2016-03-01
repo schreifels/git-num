@@ -27,12 +27,29 @@ maintain whatever color scheme you use.)
 
 # Installation
 
-git-num is tested on OSX and Linux. It requires Git 1.7.9+ and Ruby 1.9.3+.
+git-num has been tested on OSX and Linux. It requires Git v1.7.9+ and Ruby
+1.9.3+.
 
-Simply download the
+To install, download the
 [git-num executable](https://github.com/schreifels/git-num/releases),
-place it in a directory that is in your `PATH`, and `chmod +x git-num`. Git will
+place it in a directory that is on your `PATH`, and `chmod +x git-num`. Git will
 automatically use this executable when you call `git num`.
+
+Or you may simply execute:
+
+```bash
+LATEST_RELEASE_URL=$(curl -s https://api.github.com/repos/schreifels/git-num/releases | grep browser_download_url | head -n 1 | cut -d '"' -f 4)
+DESTINATION_PATH=/usr/local/bin/git-num
+
+curl -L -o $DESTINATION_PATH $LATEST_RELEASE_URL
+chmod +x $DESTINATION_PATH
+git num -h # should output git-num help screen
+```
+
+Hopefully in the future, git-num will also be available via Homebrew.
+
+If you're having issues, take a look at the
+[troubleshooting guide](#troubleshooting) below.
 
 # Customization
 
@@ -68,3 +85,58 @@ function gnc() { git num convert "$@" | pbcopy; }
 The goal of this project was to create a lightweight, well-tested Ruby command
 line utility for referencing files in Git. Unlike other similar projects,
 git-num supports renamed files, filenames with spaces, and other corner cases.
+
+# Troubleshooting
+
+## 'num' is not a git command.
+
+```
+~/sample-git-project $ git num
+git: 'num' is not a git command. See 'git --help'.
+```
+
+This means the `git-num` executable is not on your `PATH`. Verify that the file
+is located inside one of the directories listed in `echo $PATH`.
+
+## Permission denied
+
+```
+~/sample-git-project $ git num
+fatal: cannot exec 'git-num': Permission denied
+```
+
+You need to add execute permissions to the script:
+
+```bash
+chmod +x path/to/git-num
+```
+
+## 'num' appears to be a git command, but we were not able...
+
+```
+~/sample-git-project $ git num
+fatal: 'num' appears to be a git command, but we were not able to execute it.
+Maybe git-num is broken?
+```
+
+Type:
+
+```bash
+git-num
+```
+
+(Notice the hyphen.) This will execute the script directly rather than using
+`git` to execute it. You should see the actual error printed out. You will
+probably see something like:
+
+```
+bash: /usr/local/bin/git-num: /usr/bin/ruby: bad interpreter: No such file or directory
+```
+
+which means you do not have Ruby installed at `/usr/bin/ruby`. First, verify
+that you have Ruby installed. If you do, change the first line of git-num to be
+`#!/usr/bin/env ruby` (or the correct direct path).
+
+This is not the default because Ruby version managers hijack
+`#!/usr/bin/env ruby` and can be considerably slower than using the system Ruby
+directly.
