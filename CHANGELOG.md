@@ -1,4 +1,4 @@
-# Unreleased
+# 2.0.1
 * Added support for Git 1.7.9+.
 * Fixed a bug where `git num convert abc123-456` would be interpreted as "abc"
   followed by a range.
