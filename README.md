@@ -98,6 +98,9 @@ git: 'num' is not a git command. See 'git --help'.
 This means the `git-num` executable is not on your `PATH`. Verify that the file
 is located inside one of the directories listed in `echo $PATH`.
 
+Note that Git does not expand paths in the `PATH` variable, so `/Users/mike/bin`
+is fine but `~/bin` would not work.
+
 ## Permission denied
 
 ```
