@@ -1,4 +1,4 @@
-# Post-2.0.1
+# 2.1.0
 * Added early return so `git num convert` without args does not invoke `git status` unnecessarily (useful for large repos when using aliases like `alias gd="git num diff"`)
 
 # 2.0.1
