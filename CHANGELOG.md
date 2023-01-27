@@ -1,3 +1,6 @@
+# Post-2.0.1
+* Added early return so `git num convert` without args does not invoke `git status` unnecessarily (useful for large repos when using aliases like `alias gd="git num diff"`)
+
 # 2.0.1
 * Added support for Git 1.7.9+.
 * Fixed a bug where `git num convert abc123-456` would be interpreted as "abc"

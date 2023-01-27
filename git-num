@@ -46,6 +46,8 @@ class GitNum
     end
 
     def convert(indexes)
+      return '' if indexes.empty?
+
       filenames_by_index = parse_status[:filenames_by_index]
       expanded_indexes = expand_index_ranges(indexes)
 
