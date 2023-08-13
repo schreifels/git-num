@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-# Generates fixtures for the provided fixture name (see TESTING.md for details)
-# e.g. ./fixtures/generate_fixture.sh basic
+# Generates fixtures for the provided fixture name (see README.md in this
+# directory for details)
+#
+# Example usage: ./generate_fixture.sh basic
 
 set -e
 
