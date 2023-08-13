@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Generates fixtures for the provided fixture name (see README.md in this
-# directory for details)
+# Generates fixtures for the provided fixture name. See `status_test.go` for how
+# these fixtures are used.
 #
 # Example usage: ./generate_fixture.sh basic
 
