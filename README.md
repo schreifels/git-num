@@ -20,36 +20,15 @@ EXAMPLES:
 
 # Screenshot
 
-git-num works by annotating the output of `git status` with numbers. (It will
-maintain whatever color scheme you use.)
+git-num works by annotating the output of `git status` with numbers, allowing you to run subsequent commands with numbers (e.g. `git num add 5 6`) or ranges of numbers (e.g. `git num reset HEAD 1-3`). (It will maintain whatever color scheme you use.)
 
 <img src="https://raw.githubusercontent.com/schreifels/git-num/master/screenshot.png" width="550" alt="">
 
 # Installation
 
-git-num has been tested on OSX and Linux. It requires Git v1.7.9+ and Ruby
-1.9.3+.
+To install on macOS, download the appropriate [git-num executable](https://github.com/schreifels/git-num/releases) and place it in a directory that is on your `PATH`. Git will now automatically use this executable when you call `git num`.
 
-To install, download the
-[git-num executable](https://github.com/schreifels/git-num/releases),
-place it in a directory that is on your `PATH`, and `chmod +x git-num`. Git will
-automatically use this executable when you call `git num`.
-
-Or you may simply execute:
-
-```bash
-LATEST_RELEASE_URL=$(curl -s https://api.github.com/repos/schreifels/git-num/releases | grep browser_download_url | head -n 1 | cut -d '"' -f 4)
-DESTINATION_PATH=/usr/local/bin/git-num
-
-curl -L -o $DESTINATION_PATH $LATEST_RELEASE_URL
-chmod +x $DESTINATION_PATH
-git num -h # should output git-num help screen
-```
-
-Hopefully in the future, git-num will also be available via Homebrew.
-
-If you're having issues, take a look at the
-[troubleshooting guide](#troubleshooting) below.
+If you're not on macOS, or you'd like to build from source, simply clone the repo and run `make build` (you'll need `go`). The resulting binary can be found at `build/git-num`.
 
 # Customization
 
@@ -59,13 +38,16 @@ It's handy to create an alias for `git num`:
 alias gn="git num"
 ```
 
-You can take this a step further if you have aliases for other Git commands,
-e.g.:
+So you can easily run commands like `gn` (to show `git status` with annotations) and `gn add 1-3`.
+
+You can take this a step further if you have aliases for other Git commands, e.g.:
 
 ```bash
-alias ga="git num add"
-alias gr="git num reset"
+alias gs="git num"
 alias gco="git num checkout"
+alias ga="git num add"
+alias gr="git num restore"
+alias grs="git num restore --staged"
 alias gd="git num diff"
 alias gds="git num diff --staged"
 ```
@@ -82,9 +64,7 @@ function gnc() { git num convert "$@" | pbcopy; }
 
 # Goal
 
-The goal of this project was to create a lightweight, well-tested Ruby command
-line utility for referencing files in Git. Unlike other similar projects,
-git-num supports renamed files, filenames with spaces, and other corner cases.
+The goal of this project was to create a lightweight, well-tested command line utility for referencing files in Git. Unlike other similar projects, git-num supports renamed files, filenames with spaces, and other corner cases. Also, it's written in Go (rather than a dynamic language) for optimal performance and ease of installation.
 
 # Troubleshooting
 
@@ -100,46 +80,3 @@ is located inside one of the directories listed in `echo $PATH`.
 
 Note that Git does not expand paths in the `PATH` variable, so `/Users/mike/bin`
 is fine but `~/bin` would not work.
-
-## Permission denied
-
-```
-~/sample-git-project $ git num
-fatal: cannot exec 'git-num': Permission denied
-```
-
-You need to add execute permissions to the script:
-
-```bash
-chmod +x path/to/git-num
-```
-
-## 'num' appears to be a git command, but we were not able...
-
-```
-~/sample-git-project $ git num
-fatal: 'num' appears to be a git command, but we were not able to execute it.
-Maybe git-num is broken?
-```
-
-Type:
-
-```bash
-git-num
-```
-
-(Notice the hyphen.) This will execute the script directly rather than using
-`git` to execute it. You should see the actual error printed out. You will
-probably see something like:
-
-```
-bash: /usr/local/bin/git-num: /usr/bin/ruby: bad interpreter: No such file or directory
-```
-
-which means you do not have Ruby installed at `/usr/bin/ruby`. First, verify
-that you have Ruby installed. If you do, change the first line of git-num to be
-`#!/usr/bin/env ruby` (or the correct direct path).
-
-This is not the default because Ruby version managers hijack
-`#!/usr/bin/env ruby` and can be considerably slower than using the system Ruby
-directly.

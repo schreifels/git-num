@@ -1,40 +1,21 @@
-# How to run tests
+## How to run tests
 
-```bash
-bundle install
-bundle exec rspec spec/unit.rb
-bundle exec rspec spec/integration.rb
+```
+make test
 ```
 
-# How fixtures work
+## Fixtures
 
-Much of the confidence gained through the git-num unit and integration tests
-come from fixtures. These are sample states that a Git repository could be in
-when git-num is called.
+Among other things, the `fixtures/` directory contains:
 
-Each of these states can be reached by executing the shell scripts in
-`spec/fixtures/generators/` from a Git repository. Given these states, we expect
-the text files in `spec/fixtures/git_status_output/` to represent the output of
-`git status`. `spec/fixtures/git_num_output/` likewise contains the expected
-output of `git num`.
+- `git_status/` - Example outputs from the `git status` command
+- `git_num_status/` - Expected outputs from the `git num status` command for each of the fixtures in the `git_status/` directory
+- `git_num_convert/` - Expected outputs from `git num convert` given the filenames in each of the fixtures in the `git_status/` directory (to test shellwords escaping)
 
-The unit test suite checks (among other things) that when given the `git status`
-output in `spec/fixtures/git_status_output/` that `git num` will output the text
-in `spec/fixtures/git_num_output/`.
+These files can be generated automatically via:
 
-The integration test suite actually executes the scripts in
-`spec/fixtures/generators/` and validates their output against
-`spec/fixtures/git_num_output/`.
+```
+./fixtures/generate_fixture.sh <fixture name>
+```
 
-# How to create or update fixtures
-
-1. Create a shell script in `spec/fixtures/generators/` (look at the existing
-   scripts for inspiration)
-2. Run `spec/fixtures/generate_fixtures.rb`
-3. Run the unit and integration test suites. You should see a failure in both
-   suites for the fixture you created
-4. Edit the corresponding text file in `spec/fixtures/git_num_output/`, adding
-   the annotations you expect git-num to output. Remove the `# TODO: ANNOTATE`
-   note from the top of the file
-5. Run the unit and integration test suites again to validate that your test is
-   now passing
+where `<fixture name>` would be, for example, "basic" for the fixture generator defined in `fixtures/generators/basic.sh`.

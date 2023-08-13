@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-# Generates a sample git project for a screenshot demonstrating git-num
+# shellcheck disable=SC1000-SC9999
 
-# Setup ########################################################################
+# Generates a sample git project for a screenshot demonstrating git-num
 
 PS1="~/sample-git-project $ "
 mkdir git-num-sample-repo
@@ -35,7 +35,3 @@ git mv README README.md
 git add app/controllers/widgets_controller.rb spec/controllers/widgets_controller_spec.rb
 
 git num
-
-# Teardown #####################################################################
-
-cd .. && rm -rf git-num-sample-repo

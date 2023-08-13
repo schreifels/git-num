@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# This file is executed by the integration test suite and the fixture generator
+# This file is executed when generate_fixture.sh is called
 
 set -e
 

@@ -1,7 +1,6 @@
 On branch master
 Changes to be committed:
-  (use "git reset HEAD <file>..." to unstage)
-
+  (use "git restore --staged <file>..." to unstage)
 	[33mrenamed:    "file with \"double\" quotes" -> "file still with \"double\" quotes"[m
 	[33mrenamed:    file with 'single' quotes -> file still with 'single' quotes[m
 	[33mrenamed:    file with spaces -> file still with spaces[m
@@ -9,8 +8,7 @@ Changes to be committed:
 
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
-  (use "git checkout -- <file>..." to discard changes in working directory)
-
+  (use "git restore <file>..." to discard changes in working directory)
 	[32mmodified:   "file still with \"double\" quotes"[m
 	[32mmodified:   file still with 'single' quotes[m
 	[32mmodified:   file still with spaces[m
@@ -18,7 +16,5 @@ Changes not staged for commit:
 
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
-
 	[36mfile_with_!@#$%_special_chars[m
 	[36mfile_with_underscores[m
-
