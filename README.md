@@ -2,7 +2,7 @@
 
 ```
 NAME:
-  git-num - Quickly reference files in Git using numbers
+  git-num - Quickly reference files in Git commands using numbers
 
 USAGE:
   git num [git_cmd [index ...] | convert [index ...] | -h | -v]
@@ -18,19 +18,21 @@ EXAMPLES:
   git num -v             # show version
 ```
 
-# Screenshot
+# Explanation
 
-git-num works by annotating the output of `git status` with numbers, allowing you to run subsequent commands with numbers (e.g. `git num add 5 6`) or ranges of numbers (e.g. `git num reset HEAD 1-3`). (It will maintain whatever color scheme you use.)
+git-num works by annotating the output of `git status` with numbers, allowing you to run subsequent commands with numbers (e.g. `git num add 5 6`) or ranges (e.g. `git num reset HEAD 1-3`) in the place of full filenames.
 
 <img src="https://raw.githubusercontent.com/schreifels/git-num/master/screenshot.png" width="550" alt="">
+
+(git-num will maintain whatever color scheme you use.)
 
 # Installation
 
 To install on macOS, download the appropriate [git-num executable](https://github.com/schreifels/git-num/releases) and place it in a directory that is on your `PATH`. Git will now automatically use this executable when you call `git num`.
 
-If you're not on macOS, or you'd like to build from source, simply clone the repo and run `make build` (you'll need `go`). The resulting binary can be found at `build/git-num`.
+If you're not on macOS, or you'd like to build from source, simply clone the repo and run `make build` (you'll need `go`). The resulting binary can be found in the `build/` directory.
 
-# Customization
+# Useful aliases
 
 It's handy to create an alias for `git num`:
 
@@ -38,9 +40,9 @@ It's handy to create an alias for `git num`:
 alias gn="git num"
 ```
 
-So you can easily run commands like `gn` (to show `git status` with annotations) and `gn add 1-3`.
+so you can easily run commands like `gn` (to show `git status` with annotations) and `gn add 1-3`.
 
-You can take this a step further if you have aliases for other Git commands, e.g.:
+You can take this a step further by creating aliases for other Git commands, e.g.
 
 ```bash
 alias gs="git num"
@@ -52,7 +54,7 @@ alias gd="git num diff"
 alias gds="git num diff --staged"
 ```
 
-You can also use git-num in conjunction with non-Git commands, e.g.:
+You can also use git-num in conjunction with non-Git commands, e.g.
 
 ```bash
 # `ber 2` => execute `bundle exec rspec [file at index 2]`
@@ -62,7 +64,7 @@ function ber() { git num convert "$@" | xargs bundle exec rspec; }
 function gnc() { git num convert "$@" | pbcopy; }
 ```
 
-# Goal
+# History
 
 The goal of this project was to create a lightweight, well-tested command line utility for referencing files in Git. Unlike other similar projects, git-num supports renamed files, filenames with spaces, and other corner cases. Also, it's written in Go (rather than a dynamic language) for optimal performance and ease of installation.
 

@@ -9,7 +9,7 @@ const Version = "master (pre-3.0.0)"
 
 func PrintUsage() {
 	fmt.Println(`NAME:
-  git-num - Quickly reference files in Git using numbers
+  git-num - Quickly reference files in Git commands using numbers
 
 USAGE:
   git num [git_cmd [index ...] | convert [index ...] | -h | -v]
