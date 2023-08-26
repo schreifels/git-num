@@ -1,3 +1,13 @@
+# git-num
+
+git-num annotates the output of `git status` with numbers, allowing you to run subsequent commands with numbers (e.g. `git num add 5 6`) and/or ranges (e.g. `git num reset HEAD 1-3`) in the place of full filenames.
+
+<!-- For posterity, this was encoded via: `ffmpeg -i demo.mp4 -vf "fps=6,scale=700:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 demo.gif` -->
+
+![](https://raw.githubusercontent.com/schreifels/git-num/media-for-readme/demo.gif)
+
+(git-num will maintain whatever color scheme you use.)
+
 # Usage
 
 ```
@@ -17,16 +27,6 @@ EXAMPLES:
   git num -h             # show this help screen
   git num -v             # show version
 ```
-
-# Explanation
-
-git-num works by annotating the output of `git status` with numbers, allowing you to run subsequent commands with numbers (e.g. `git num add 5 6`) or ranges (e.g. `git num reset HEAD 1-3`) in the place of full filenames.
-
-<!-- For posterity, this was encoded via: `ffmpeg -i demo.mp4 -vf "fps=6,scale=700:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 demo.gif` -->
-
-![](https://raw.githubusercontent.com/schreifels/git-num/media-for-readme/demo.gif)
-
-(git-num will maintain whatever color scheme you use.)
 
 # Installation
 
