@@ -1,3 +1,7 @@
+# 3.0.1
+
+- Added early return for improved performance of commands like `git num diff` when invoked with no args (useful for large repos when all of your git aliases wrap `git num`) (regression from the rewrite)
+
 # 3.0.0
 
 - Full rewrite in Go.

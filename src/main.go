@@ -34,18 +34,29 @@ func main() {
 		args = []string{"status"}
 	}
 
-	switch args[0] {
+	command := args[0]
+	commandArgs := args[1:]
+
+	switch command {
 	case "-v", "--version":
 		fmt.Println("git-num version " + Version)
 	case "-h", "--help":
 		PrintUsage()
 	case "convert":
-		fmt.Print(JoinForShell(ConvertNumbersToFiles(RunAndParseStatus().filenames, args[1:])))
+		if len(commandArgs) > 0 {
+			fmt.Print(JoinForShell(ConvertNumbersToFiles(RunAndParseStatus().filenames, commandArgs)))
+		}
 	case "status":
 		fmt.Print(RunAndParseStatus().annotatedGitStatus)
 	default:
-		gitArgs := []string{args[0]}
-		gitArgs = append(gitArgs, ConvertNumbersToFiles(RunAndParseStatus().filenames, args[1:])...)
+		gitArgs := []string{command} // in this case, `command` is a Git command (e.g. "add")
+
+		// For optimal performance in large repos, we'll skip fetching/parsing
+		// `git status` if no numbers were passed (e.g. `git num diff`)
+		if len(commandArgs) > 0 {
+			gitArgs = append(gitArgs, ConvertNumbersToFiles(RunAndParseStatus().filenames, commandArgs)...)
+		}
+
 		RunGitCommandAndExit(gitArgs)
 	}
 }
