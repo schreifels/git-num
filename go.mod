@@ -1,4 +1,4 @@
-module gitnum
+module github.com/schreifels/git-num
 
 go 1.20
 
