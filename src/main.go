@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-const Version = "master (post-3.0.1)"
+const Version = "3.0.2"
 
 func PrintUsage() {
 	fmt.Println(`NAME:

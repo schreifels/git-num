@@ -1,4 +1,4 @@
-module github.com/schreifels/git-num
+module github.com/schreifels/git-num/v3
 
 go 1.20
 
