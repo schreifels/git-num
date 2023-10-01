@@ -6,6 +6,7 @@ go 1.20
 retract (
 	v3.0.2
 	v3.0.3
+	v3.0.4
 )
 
 require (
