@@ -1,13 +1,9 @@
-module github.com/schreifels/git-num/v3
+module github.com/schreifels/git-num/v4
 
 go 1.20
 
-// Retract failed attempts at making the module visible on pkg.go.dev
-retract (
-	v3.0.2
-	v3.0.3
-	v3.0.4
-)
+// Retract initial failed attempt at making the module visible on pkg.go.dev
+retract v4.0.0
 
 require (
 	github.com/Wing924/shellwords v1.1.0
