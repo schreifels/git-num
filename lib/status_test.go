@@ -1,4 +1,4 @@
-package main
+package lib
 
 import (
 	"log"
@@ -59,8 +59,8 @@ func TestParseStatus(t *testing.T) {
 			expectedGitNumConvertOutput := strings.TrimSpace(expectedGitNumConvertOutputs[fixtureName])
 
 			actualParsedStatus := ParseStatus(gitStatusOutput)
-			assert.Equal(t, expectedGitNumOutput, actualParsedStatus.annotatedGitStatus)
-			assert.Equal(t, expectedGitNumConvertOutput, JoinForShell(actualParsedStatus.filenames))
+			assert.Equal(t, expectedGitNumOutput, actualParsedStatus.AnnotatedGitStatus)
+			assert.Equal(t, expectedGitNumConvertOutput, JoinForShell(actualParsedStatus.Filenames))
 		})
 	}
 }

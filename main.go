@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"os"
+
+	. "github.com/schreifels/git-num/v4/lib"
 )
 
 const Version = "master (post-3.0.2)"
@@ -44,17 +46,17 @@ func main() {
 		PrintUsage()
 	case "convert":
 		if len(commandArgs) > 0 {
-			fmt.Print(JoinForShell(ConvertNumbersToFiles(RunAndParseStatus().filenames, commandArgs)))
+			fmt.Print(JoinForShell(ConvertNumbersToFiles(RunAndParseStatus().Filenames, commandArgs)))
 		}
 	case "status":
-		fmt.Print(RunAndParseStatus().annotatedGitStatus)
+		fmt.Print(RunAndParseStatus().AnnotatedGitStatus)
 	default:
 		gitArgs := []string{command} // in this case, `command` is a Git command (e.g. "add")
 
 		// For optimal performance in large repos, we'll skip fetching/parsing
 		// `git status` if no numbers were passed (e.g. `git num diff`)
 		if len(commandArgs) > 0 {
-			gitArgs = append(gitArgs, ConvertNumbersToFiles(RunAndParseStatus().filenames, commandArgs)...)
+			gitArgs = append(gitArgs, ConvertNumbersToFiles(RunAndParseStatus().Filenames, commandArgs)...)
 		}
 
 		RunGitCommandAndExit(gitArgs)

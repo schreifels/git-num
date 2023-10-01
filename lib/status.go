@@ -1,4 +1,4 @@
-package main
+package lib
 
 import (
 	"bufio"
@@ -12,9 +12,9 @@ var gitStatusRegex = regexp.MustCompile(`(\t)(\x1b\[[0-9]+m)(.+:\s+)?(.+)(\x1b\[
 
 type ParsedStatus struct {
 	// Filenames extracted from the output of `git status` (in that order)
-	filenames []string
+	Filenames []string
 	// `git status` with number annotations added in (includes colors)
-	annotatedGitStatus string
+	AnnotatedGitStatus string
 }
 
 func RunAndParseStatus() *ParsedStatus {
