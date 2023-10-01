@@ -7,7 +7,7 @@ import (
 	. "github.com/schreifels/git-num/v4/lib"
 )
 
-const Version = "4.0.1"
+const Version = "master (post-4.0.1)"
 
 func PrintUsage() {
 	fmt.Println(`NAME:
