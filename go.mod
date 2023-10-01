@@ -5,7 +5,7 @@ go 1.20
 // Retract failed attempts at making the module visible on pkg.go.dev
 retract (
 	v3.0.2
-	v4.0.0
+	v3.0.3
 )
 
 require (

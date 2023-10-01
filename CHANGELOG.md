@@ -1,3 +1,7 @@
+# 3.0.3
+
+- Retracted 3.0.2, which was insufficient to fix the module publishing issue.
+
 # 3.0.2
 
 - Updated `go.mod` to allow installation via `go install`.
