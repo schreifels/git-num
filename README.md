@@ -30,9 +30,9 @@ EXAMPLES:
 
 # Installation
 
-## Binaries
+## Binaries (recommended)
 
-To install on macOS, download the appropriate [git-num executable](https://github.com/schreifels/git-num/releases) and place it in a directory that is on your `PATH`. Git will now automatically use this executable when you call `git num`.
+To install on macOS, download the appropriate [git-num executable](https://github.com/schreifels/git-num/releases) and place it in a directory that is on your `$PATH`. Git will now automatically use this executable when you call `git num`.
 
 ## Building from source with `go install`
 
