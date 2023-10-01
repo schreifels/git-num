@@ -30,9 +30,27 @@ EXAMPLES:
 
 # Installation
 
+## Binaries
+
 To install on macOS, download the appropriate [git-num executable](https://github.com/schreifels/git-num/releases) and place it in a directory that is on your `PATH`. Git will now automatically use this executable when you call `git num`.
 
-If you're not on macOS, or you'd like to build from source, simply clone the repo and run `make build` (you'll need `go`). The resulting binary can be found in the `build/` directory.
+## Building from source with `go install`
+
+If you'd like to build from source manually, install Go v1.19+ and run:
+
+```bash
+go install github.com/schreifels/git-num/v4@latest
+```
+
+Then make sure your Go bin directory is in your `$PATH` in your shell initialization file:
+
+```bash
+export PATH="$PATH:$HOME/go/bin"
+```
+
+## Building from source with `make`
+
+You can also clone the repo and run `make build`. As with the prior option, you'll need Go v1.19+. The resulting binary can be found in the `build/` directory.
 
 # Useful aliases
 
