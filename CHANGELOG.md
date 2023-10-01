@@ -1,3 +1,7 @@
+# 4.0.0
+
+- No changes, just a major version bump so that git-num can be properly indexed on https://pkg.go.dev/.
+
 # 3.0.2
 
 - Updated `go.mod` to allow installation via `go install`.
