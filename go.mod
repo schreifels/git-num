@@ -2,6 +2,12 @@ module github.com/schreifels/git-num/v3
 
 go 1.20
 
+// Retract failed attempts at making the module visible on pkg.go.dev
+retract (
+	v3.0.2
+	v4.0.0
+)
+
 require (
 	github.com/Wing924/shellwords v1.1.0
 	github.com/stretchr/testify v1.8.4
