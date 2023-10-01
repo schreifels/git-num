@@ -1,10 +1,10 @@
-# 3.0.3
+# 4.0.1
 
-- Retracted 3.0.2, which was insufficient to fix the module publishing issue.
+- Renamed packages to make the project installable via `go install`.
 
-# 3.0.2
+# 3.0.2, 3.0.3, 4.0.0
 
-- Updated `go.mod` to allow installation via `go install`.
+- These versions were failed attempts at making the project installable via `go install` and were retracted from the go pkg proxy.
 
 # 3.0.1
 
