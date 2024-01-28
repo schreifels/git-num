@@ -1,0 +1,27 @@
+[1;30m[m[1;30mOn branch [m[36mschreifels/git-num/issues/7[m
+[1;30mYour branch is up to date with 'origin/schreifels/git-num/issues/7'.[m
+
+[1;30mUntracked files:[m
+[1;30m  (use "git add <file>..." to include in what will be committed)[m
+[1;30m	[m[36mall_deps.json[m
+[1;30m	[m[36mapp.svg[m
+[1;30m	[m[36mapp/billing.svg[m
+[1;30m	[m[36mapp/fixtures/testim/__init__.py[m
+[1;30m	[m[36mapp/monitoring.dot[m
+[1;30m	[m[36mapp/monitoring.svg[m
+[1;30m	[m[36mapp/pydeps.dot[m
+[1;30m	[m[36mapp/pydeps.ini[m
+[1;30m	[m[36mci/architecture_metrics/[m
+[1;30m	[m[36mci/codeowners/[m
+[1;30m	[m[36mdata.json[m
+[1;30m	[m[36mexcludes.txt[m
+[1;30m	[m[36mgit-status-output.txt[m
+[1;30m	[m[36mgraph.dot[m
+[1;30m	[m[36minternal_deps.svg[m
+[1;30m	[m[36mmypy.ini[m
+[1;30m	[m[36mpydeps.dot[m
+[1;30m	[m[36mrequirements.txt[m
+[1;30m	[m[36mstdin_out.csv[m
+[1;30m	[m[36msummary.txt[m
+
+nothing added to commit but untracked files present (use "git add" to track)

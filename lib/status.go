@@ -8,7 +8,20 @@ import (
 	"strings"
 )
 
-var gitStatusRegex = regexp.MustCompile(`(\t)(\x1b\[[0-9;]+m)(.+:\s+)?(.+)(\x1b\[m)`)
+var setColorEscapeSequence = `\x1b\[[0-9;]+m`
+var resetColorEscapeSequence = `\x1b\[m`
+var gitStatusRegex = regexp.MustCompile(
+	// tabMatch:
+	`^((?:` + setColorEscapeSequence + `)?\t(?:` + resetColorEscapeSequence + `)?)` +
+		// startColorMatch:
+		`(` + setColorEscapeSequence + `)` +
+		// descriptionMatch (e.g. "new file:" or "modified:"):
+		`(.+:\s+)?` +
+		// filenamesMatch:
+		`(.+)` +
+		// resetColorMatch:
+		`(` + resetColorEscapeSequence + `)`,
+)
 
 type ParsedStatus struct {
 	// Filenames extracted from the output of `git status` (in that order)
@@ -77,7 +90,7 @@ func parseStatusLine(line string, nextNumber int) (maybeAnnotatedLine string, fi
 		startColorMatch := matches[2]
 		descriptionMatch := matches[3] // e.g. "new file:" or "modified:"
 		filenamesMatch := matches[4]
-		endColorMatch := matches[5]
+		resetColorMatch := matches[5]
 
 		filenames = strings.Split(filenamesMatch, " -> ")
 		annotatedFilenames := annotateFilenameWithNumber(filenames[0], nextNumber)
@@ -88,7 +101,7 @@ func parseStatusLine(line string, nextNumber int) (maybeAnnotatedLine string, fi
 			annotatedFilenames += " -> " + annotateFilenameWithNumber(filenames[1], nextNumber)
 		}
 
-		maybeAnnotatedLine = tabMatch + startColorMatch + descriptionMatch + annotatedFilenames + endColorMatch
+		maybeAnnotatedLine = tabMatch + startColorMatch + descriptionMatch + annotatedFilenames + resetColorMatch
 	} else {
 		// Our regex didn't find any files on this line, so return it unchanged
 		maybeAnnotatedLine = line
