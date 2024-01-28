@@ -1,0 +1,14 @@
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	[1;32mmodified:   [1] file1[m
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	[1;36m[2] file2[m
+	[1;36m[3] file3[m
+
+no changes added to commit (use "git add" and/or "git commit -a")

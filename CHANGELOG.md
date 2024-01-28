@@ -1,3 +1,7 @@
+# Pre-release
+
+- Updated `git status` parsing to support bold colors
+
 # 4.0.1
 
 - Renamed packages to make the project installable via `go install`.

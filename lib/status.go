@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-var gitStatusRegex = regexp.MustCompile(`(\t)(\x1b\[[0-9]+m)(.+:\s+)?(.+)(\x1b\[m)`)
+var gitStatusRegex = regexp.MustCompile(`(\t)(\x1b\[[0-9;]+m)(.+:\s+)?(.+)(\x1b\[m)`)
 
 type ParsedStatus struct {
 	// Filenames extracted from the output of `git status` (in that order)
