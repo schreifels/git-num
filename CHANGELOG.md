@@ -1,6 +1,7 @@
 # Pre-release
 
 - Updated `git status` parsing to support bold colors
+- Created new (undocumented) `git num debug-regex` CLI option for debugging the regex parsing of a particular `git status` output
 
 # 4.0.1
 

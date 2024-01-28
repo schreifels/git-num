@@ -43,6 +43,29 @@ func ParseStatus(gitStatus string) *ParsedStatus {
 	return &ParsedStatus{filenames, annotatedGitStatus.String()}
 }
 
+func DebugStatusRegex(scanner *bufio.Scanner) {
+	fmt.Println("")
+
+	lineNum := 1
+	for scanner.Scan() {
+		line := scanner.Text()
+		fmt.Printf("LINE %2d:\t%s\n", lineNum, line)
+		matches := gitStatusRegex.FindStringSubmatch(line)
+		for matchIdx, match := range matches {
+			if matchIdx != 0 {
+				fmt.Printf("\t\tMATCH %d: %s\n", matchIdx, match)
+			}
+		}
+		lineNum++
+	}
+
+	fmt.Println("")
+
+	if err := scanner.Err(); err != nil {
+		log.Fatal(err)
+	}
+}
+
 func annotateFilenameWithNumber(filename string, number int) string {
 	return fmt.Sprintf("[%d] %s", number, filename)
 }

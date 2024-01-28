@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"os"
 
@@ -50,6 +51,11 @@ func main() {
 		}
 	case "status":
 		fmt.Print(RunAndParseStatus().AnnotatedGitStatus)
+	// Debug the file regex based on the `git status` output provided to STDIN
+	//   Example usage: make build && cat ~/p/git-num/lib/fixtures/git_status/renames.txt | git num debug-regex | cat -v
+	case "debug-regex":
+		scanner := bufio.NewScanner(os.Stdin)
+		DebugStatusRegex(scanner)
 	default:
 		gitArgs := []string{command} // in this case, `command` is a Git command (e.g. "add")
 
