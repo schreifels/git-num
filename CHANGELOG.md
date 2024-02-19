@@ -1,4 +1,4 @@
-# Pre-release
+# 4.0.2
 
 - Updated `git status` parsing to support bold colors
 - Updated `git status` parsing to support colored tab characters (see issue #7)
